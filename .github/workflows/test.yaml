@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Test
 
 on:
   push:
@@ -7,11 +7,22 @@ on:
     paths-ignore:
       - "*.md"
       - LICENSE
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+    - "*.md"
+    - LICENSE
+    - "*.yaml"
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
     steps:
       - name: Checkout
@@ -20,9 +31,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install packages
         run: npm ci
-      - name: Build 
-        run: npm run build
-      - name: Upload to github pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist 
+      - name: Test
+        run: npm test
+
+        
+          

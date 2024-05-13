@@ -1,17 +1,10 @@
-import React from 'react';
-import projectPresentation from 'src/projectPresentation';
+import React, { Component } from "react";
+import ProjectDetails from "./projectComponents/projectDetails";
 
-class projectContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            message: 'Benvenuto sulla nostra projects page!'
-        };
-    }
-
+class projectContainer extends Component {
     render() {
         return (
-            <HomePage message={this.state.message} />
+            <ProjectDetails message="Hello World!" />
         );
     }
 }

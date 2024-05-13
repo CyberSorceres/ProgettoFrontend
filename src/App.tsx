@@ -1,13 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import projectContainer from "./projectContainer";
+// App.tsx
+import React from 'react';
+import ContainerComponent from './ContainerComponent';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
-        <Route path="/" Component={projectContainer} />
-    </Router>
-  )
-}
+    <div>
+      <ContainerComponent />
+    </div>
+  );
+};
 
 export default App;

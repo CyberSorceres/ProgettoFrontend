@@ -1,0 +1,55 @@
+.notification-page {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Una colonna per la lista delle notifiche e una per le notifiche ingrandite */
+    gap: 20px; /* Spazio tra le colonne */
+  }
+  
+  .notification-list-column {
+    /* Stile per la colonna delle notifiche */
+  }
+  
+  .notification-list {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .notification {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .notification:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .notification-detail-column {
+    /* Stile per la colonna delle notifiche ingrandite */
+  }
+  
+  .notification-detail {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .notification-detail h2 {
+    margin-top: 0;
+  }
+  
+  .notification-detail p {
+    margin-bottom: 20px;
+  }
+  
+  .notification-detail button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .notification-detail button:hover {
+    background-color: #d32f2f;
+  }
+  

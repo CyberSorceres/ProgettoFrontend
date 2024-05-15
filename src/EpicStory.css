@@ -1,0 +1,13 @@
+.progress-epic-story {
+    width: 60%;
+    height: 20px;
+}
+
+.EpicStoryDiv {
+    display: flex; /* Abilita Flexbox sul div contenitore */
+    flex-direction: column; /* Imposta la direzione dei figli come colonna */
+}
+
+.UserStoryDiv {
+    margin-left: 50px; /* Aggiunge un margine sinistro di 20px al div UserStoryDiv */
+}

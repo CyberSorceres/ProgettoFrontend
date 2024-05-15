@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const AddRequestButton: React.FC = () => {
-  return (
-    <div className="AddRequestButtonDiv">
-        <p>Aggiungi richiesta</p>
-        <button>Bottone</button>
-    </div>
-  )
-};
+    return (
+        <div>
+            <button>Invia Richiesta</button>
+        </div>
+    );
+}
 
 export default AddRequestButton;

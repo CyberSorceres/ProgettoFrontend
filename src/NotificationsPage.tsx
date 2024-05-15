@@ -73,7 +73,7 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
   const handleCloseNotification = () => {
     setSelectedNotificationIndex(null);
   };
-
+  
   return (
     <div className="notification-page">
       <div className="notification-column">

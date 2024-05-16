@@ -7,7 +7,7 @@ interface Project {
   }
 
 
-const ProjectDetailComponent: React.FC<{ project: Project; onClose: (arg: any) => void }> = ({ project, onClose }) => {
+const ProjectCreationDetails: React.FC<{ project: Project; onClose: (arg: any) => void }> = ({ project, onClose }) => {
     return (
       <div className="project-detail">
         <h2>{project.title}</h2>
@@ -17,5 +17,4 @@ const ProjectDetailComponent: React.FC<{ project: Project; onClose: (arg: any) =
     );
   };
 
-  export default ProjectDetailComponent;
-
+  export default ProjectCreationDetails;

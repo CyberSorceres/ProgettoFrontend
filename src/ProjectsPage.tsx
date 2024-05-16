@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { useState } from "react";
 
-
-import ProjectContainer from './ProjectContainer';
+import ProjectContainer from "./ProjectContainer";
 
 interface Project {
   title: string;
- 
 }
-const projectsData: Project[] = [
-  { title: 'Progetto 1' },
-  { title: 'Progetto 2' },
-  
-];
+
 const ProjectsPage: React.FC = () => {
-  
+  const [projectsData, setProjectsData]: Project[] = useState([
+    { title: "Progetto 1" },
+    { title: "Progetto 2" },
+  ]);
+  const handleNewProjectClick = (newProject: Project) => {
+    console.log("hi");
+    //setSelectedProject(newProject); // Set the newly created project as selected
+    setProjectsData([...projectsData, newProject]);
+  };
   return (
     <div>
-      <ProjectContainer projects={projectsData} />;
-      
-      
+      <ProjectContainer
+        projects={projectsData}
+        handleNewProjectClick={handleNewProjectClick}
+      />
+      ;
     </div>
   );
 };
 
-
 export default ProjectsPage;
-
-

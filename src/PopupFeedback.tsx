@@ -27,12 +27,12 @@ const PopupFeedback: React.FC = () => {
 
     return (
         <div>
-            <button onClick={handleButtonClick}>Apri Popup</button>
+            <button onClick={handleButtonClick}>Invia feedback</button>
             {isOpen && (
                 <div className="popup">
                     <h2>Titolo del Popup</h2>
                     <input type="text" value={inputValue} onChange={handleInputChange} />
-                    <button onClick={handleCloseButtonClick}>Chiudi</button>
+                    <button className="close-popup" onClick={handleCloseButtonClick}>Chiudi</button>
                 </div>
             )}
         </div>

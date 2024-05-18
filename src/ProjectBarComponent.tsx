@@ -15,7 +15,7 @@ const ProjectBarComponent: React.FC<{
   handleNewProjectClick: (project: Project) => void;
 }> = ({ projects, onProjectClick, handleNewProjectClick }) => {
   const handleProjectSelection = (index: number) => {
-    setSelectedProject(projectsData[index]);
+    
   };
 
   return (
@@ -32,6 +32,7 @@ const ProjectBarComponent: React.FC<{
       <ProjectCreationButton
         title={"Crea nuovo progetto"}
         onClick={handleNewProjectClick}
+        
       />
     </div>
   );

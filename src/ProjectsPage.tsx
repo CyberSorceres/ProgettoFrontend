@@ -7,7 +7,7 @@ interface Project {
 }
 
 const ProjectsPage: React.FC = () => {
-  const [projectsData, setProjectsData]: Project[] = useState([
+  const [projectsData, setProjectsData] = useState([
     { title: "Progetto 1" },
     { title: "Progetto 2" },
   ]);
@@ -22,7 +22,7 @@ const ProjectsPage: React.FC = () => {
         projects={projectsData}
         handleNewProjectClick={handleNewProjectClick}
       />
-      ;
+      
     </div>
   );
 };

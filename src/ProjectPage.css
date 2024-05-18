@@ -1,12 +1,10 @@
 .project-page {
     display: grid;
-    grid-template-columns: 1fr 3fr; /* Una colonna per la lista delle notifiche e una per le notifiche ingrandite */
+    /*grid-template-columns: 1fr 3fr; /* Una colonna per la lista delle notifiche e una per le notifiche ingrandite */
     gap: 20px; /* Spazio tra le colonne */
   }
   
-  .notification-list-column {
-    /* Stile per la colonna delle notifiche */
-  }
+ 
   
   .project-list {
     border: 1px solid #ccc;

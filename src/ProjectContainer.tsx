@@ -13,7 +13,7 @@ interface Project {
 const ProjectContainer: React.FC<{
   projects: Project[];
   handleNewProjectClick: (p: Project) => void;
-}> = ({ projects, handleNewProjectClick }) => {
+}> = ({ projects, handleNewProjectClick}) => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
     number | null
   >(null);
@@ -29,21 +29,10 @@ const ProjectContainer: React.FC<{
 
   return (
     <div className="project-page">
-      <div className="project-column">
-        <ProjectBarComponent
-          projects={projects}
-          onProjectClick={handleProjectClick}
-          handleNewProjectClick={handleNewProjectClick}
-        />
-      </div>
-      <div className="project-column">
-        {selectedProjectIndex !== null && (
-          <ProjectDetailComponent
-            project={projects[selectedProjectIndex]}
-            onClose={handleCloseProject}
-          />
-        )}
-      </div>
+    <ProjectCreationButton
+        title={"Crea nuovo progetto"}
+        onClick={handleNewProjectClick}
+      />
     </div>
   );
 };

@@ -12,6 +12,7 @@ const ProjectCreationButton: React.FC<{
   const handleNewProjectClick = () => {
     const newProject: Project = { title: "New Project" };
     onClick(newProject); // Pass newProject to the onClick function
+    
   };
 
   return (

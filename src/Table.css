@@ -1,0 +1,10 @@
+div .table{
+    width: 80%;
+    margin: auto;
+    padding: 2em;
+}
+
+div .textSearch{
+    float: right;
+    height: 3em;
+}

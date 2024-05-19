@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProjectsPage from './ProjectsPage';
 import NotificationsPage from './NotificationsPage';
 import NavigationBar from './NavigationBar';
+import ProjectDetails from './ProjectDetails';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <NavigationBar />
       <Routes>
         <Route path="/" element={<ProjectsPage />} />
+        <Route path="/project/:id" element={<ProjectDetails />} />
         <Route path="/notifiche" element={<NotificationsPage />} />
       </Routes>
     </Router>

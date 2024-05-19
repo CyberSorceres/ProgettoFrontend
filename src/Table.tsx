@@ -1,58 +1,55 @@
-import React, {useState} from "react";
-import DataTable from "react-data-table-component";
+import React, { useState } from 'react';
+import DataTable, { TableColumn } from 'react-data-table-component';
+import { useNavigate } from 'react-router-dom';
 import './Table.css';
 
-const Table: React.FC=() => {
-    
-    const colums=[
-    { 
-        name: 'Titile',
-        selector: (row: any) =>row.title,
-        sortable: true
-    },
-    {
-         name:'Client',
-         selector: (row: any) =>row.client,
-        sortable: true
-    },
-    {
-        name: 'Data di Inizio', 
-        selector: (row: any) =>row.startDate,
-        sortable: true
-    }
+interface Project {
+  id: number;
+  title: string;
+  client: string;
+  startDate: string;
+}
+
+const columns: TableColumn<Project>[] = [
+  { name: 'Titolo', selector: (row) => row.title, sortable: true },
+  { name: 'Cliente', selector: (row) => row.client, sortable: true },
+  { name: 'Data di Inizio', selector: (row) => row.startDate, sortable: true },
+  { name: 'ID', selector: (row) => row.id.toString(), sortable: true },
 ];
 
-const data=[
-    {
-        id: 1,
-        title: 'CHatGpt vs Bedrock',
-        client: 'Zero12',
-        startDate:'11/05/2024'
-    }
-]
+const projects: Project[] = [
+  { id: 1, title: 'ChatGPT vs Bedrock', client: 'Zero12', startDate: '11/05/2024' },
+  { id: 2, title: 'Project Alpha', client: 'Client X', startDate: '12/12/2023' },
+  // Aggiungi altri progetti qui
+];
 
-    const[records, setRecords]= useState(data);
+const ProjectsTable: React.FC = () => {
+    const navigate = useNavigate();
+    const [records, setRecords] =useState(projects);
+  
+    const handleRowClick = (project: Project) => {
+      navigate(`/project/${project.id}`);
+    };
 
-    function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void{
-        const newData=data.filter(row =>{
-            return row.title.toLowerCase().includes(event.target.value.toLowerCase());
+    function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
+        const newData = projects.filter(row => {
+          return row.title.toLowerCase().includes(event.target.value.toLowerCase());
         });
         setRecords(newData);
-    }
+      }
 
-return(
+  return (
     <div className='container mt-5 table'>
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
-        <DataTable
-            columns={colums}
-            data={records}
-            fixedHeader
-            pagination
-        >
-
-        </DataTable>
+      <DataTable
+        columns={columns}
+        data={records}
+        highlightOnHover
+        pagination
+        onRowClicked={handleRowClick}
+      />
     </div>
-)
+  );
+};
 
-}
-export default Table;
+export default ProjectsTable;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DropdownButton from './DropdownButton';
 import DropdownMenu from './DropdownMenu';
 
@@ -7,7 +7,22 @@ import './DropdownMenu.css';
 const DropdownContainer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>(['Opzione 1', 'Opzione 2', 'Opzione 3']);
+  const [options, setOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchOptions();
+  }, []);
+
+  //recupero sviluppatori collegati al progetto
+  const fetchOptions = async () => {
+    try {
+      const response = await fetch('https://api-endpoint.com/options');
+      const data = await response.json();
+      setOptions(data.options);
+    } catch (error) {
+      console.error('Errore nel recuperare le opzioni:', error);
+    }
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,15 +41,36 @@ const DropdownContainer: React.FC = () => {
     setIsOpen(false);
   };
 
-  const addOption = (newOption: string) => {
-    setOptions((prevOptions) => [...prevOptions, newOption]);
+  //aggiunta sviluppatori
+  const addOption = async (newOption: string) => {
+    try {
+      const response = await fetch('https://api-endpoint.com/options', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ option: newOption }),
+      });
+      const data = await response.json();
+      setOptions((prevOptions) => [...prevOptions, data.option]);
+    } catch (error) {
+      console.error('Errore nell\'aggiungere l\'opzione:', error);
+    }
   };
 
-  const deleteOption = (optionToDelete: string) => {
-    setOptions((prevOptions) => prevOptions.filter((option) => option !== optionToDelete));
-    setSelectedOptions((prevSelectedOptions) => 
-      prevSelectedOptions.filter((option) => option !== optionToDelete)
-    );
+  //cancellazione sviluppatori
+  const deleteOption = async (optionToDelete: string) => {
+    try {
+      await fetch(`https://api-endpoint.com/options/${optionToDelete}`, {
+        method: 'DELETE',
+      });
+      setOptions((prevOptions) => prevOptions.filter((option) => option !== optionToDelete));
+      setSelectedOptions((prevSelectedOptions) => 
+        prevSelectedOptions.filter((option) => option !== optionToDelete)
+      );
+    } catch (error) {
+      console.error('Errore nel cancellare l\'opzione:', error);
+    }
   };
 
   return (

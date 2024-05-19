@@ -2,6 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import ProjectsPage from './ProjectsPage';
 import NotificationsPage from './NotificationsPage';
 import NavigationBar from './NavigationBar';

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+import AddProjectButton from './AddProject';
 import './Table.css';
 
 interface Project {
@@ -40,6 +41,7 @@ const ProjectsTable: React.FC = () => {
 
   return (
     <div className='container mt-5 table'>
+        <AddProjectButton/>
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
       <DataTable
         columns={columns}

@@ -102,7 +102,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const navigate = useNavigate();
   const [records, setRecords] = useState<EpicStoryProp[]>(fakeData);
   const handleRowClick = (fakeData: UserStoryProp) => {
-    navigate(`/project/:id/userstory/:id/${fakeData.id}`);
+    navigate(`userstory/${fakeData.id}`);
   };
   function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
     const newData = fakeData.filter(row => {

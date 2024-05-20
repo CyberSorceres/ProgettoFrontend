@@ -29,24 +29,26 @@ const EpicDetails: React.FC = () => {
   useEffect(() => {
     const fetchProject = async () => {
       // Sostituisci con il tuo endpoint API reale
-      const response = await fetch(`/api/projects/${id}`);
+	/*const response = await fetch(`/api/projects/${id}`);
       const data = await response.json();
       setProject(data);
       const responseUser = await fetch(`/api/projects/${id}/user-stories`);
       const dataUser= await response.json();
-      setEpicStories(data);
+      setEpicStories(data);*/
+	setProject({ id: 1, title: 'ChatGPT vs Bedrock', client: 'Zero12', startDate: '11/05/2024' , epicStory: {1: {
+	    
+	}}})
     };
 
     fetchProject();
   }, [id]);
 
   if (!project) {
-    return <UserStory></UserStory>;
-    //<div>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
-   <UserStory></UserStory>
+      <UserStory epicStory={project.epicStory[id]}></UserStory>
   );
 };
 

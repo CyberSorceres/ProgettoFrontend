@@ -8,7 +8,9 @@ import ProjectsPage from './ProjectsPage';
 import NotificationsPage from './NotificationsPage';
 import NavigationBar from './NavigationBar';
 import ProjectDetails from './ProjectDetails';
-
+import EpicStory from './EpicStory';
+import UserStory from './UserStory';
+import EpicDetails from './EpicDetails';
 const App: React.FC = () => {
   return (
     <Router>
@@ -16,6 +18,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<ProjectsPage />} />
         <Route path="/project/:id" element={<ProjectDetails />} />
+        <Route path="/project/:id/userstory/:id" element={<EpicDetails />} />
         <Route path="/notifiche" element={<NotificationsPage />} />
       </Routes>
     </Router>

@@ -51,8 +51,17 @@ const columns: TableColumn<EpicStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
+  {
+    name: 'Actions',
+    cell: (row: EpicStoryProp) => (
+     <DropdownContainer />
+    ),
+  },
 ];
-
+const handleButtonClick = (row: EpicStoryProp) => {
+  // Handle button click logic here
+  console.log('Button clicked for row:', row);
+};
 
 const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
@@ -125,6 +134,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         highlightOnHover
         pagination
         onRowClicked={handleRowClick}
+        
       />
       </div>
       

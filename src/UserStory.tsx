@@ -90,15 +90,24 @@ const columns: TableColumn<UserStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
+  {
+    name: 'Actions',
+    cell: (row: UserStoryProp) => (
+      <DropdownContainer/>
+    ),
+  },
 ];
+
+const handleButtonClick = (row: UserStoryProp) => {
+  // Handle button click logic here
+  console.log('Button clicked for row:', row);
+};
 const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
 
-  const handleRowClick = (fakeData: UserStoryProp) => {
-    navigate(`/UserStory/${fakeData.id}`);
-  };
+
   useEffect(() => {
     // Map over the userStoryArray in fakeData and create a new array of objects
     const newRecords = fakeData.map((item) => {
@@ -129,7 +138,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         data={records}
         highlightOnHover
         pagination
-        onRowClicked={handleRowClick}
+       
       />
       </div>
       

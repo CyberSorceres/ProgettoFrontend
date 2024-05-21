@@ -110,7 +110,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     },
   ];
   const navigate = useNavigate();
-  const [records, setRecords] = useState<EpicStoryProp[]>(fakeData);
+  const [epicRecords, setRecords] = useState<EpicStoryProp[]>(fakeData);
   const handleRowClick = (fakeData: UserStoryProp) => {
     navigate(`userstory/${fakeData.id}`);
   };

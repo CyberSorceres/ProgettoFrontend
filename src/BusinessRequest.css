@@ -1,12 +1,14 @@
-div.dialogContent{
-    background-color: white;
-
-}
 
 div textarea.form-control{
     resize: none;
     height: 14em;
+    margin-top: 2em;
 }
+
+form button.btn{
+    background-color: #e78809;
+}
+
 
 div textarea.form-control:focus {
     border-color: #e78809;

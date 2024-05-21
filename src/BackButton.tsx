@@ -1,15 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import {
-    MDBBtn,
-    MDBModal,
-    MDBModalDialog,
-    MDBModalContent,
-    MDBModalHeader,
-    MDBModalTitle,
-    MDBModalBody,
-    MDBModalFooter,
-    MDBInput,
+    MDBBtn
   } from 'mdb-react-ui-kit';
   
 

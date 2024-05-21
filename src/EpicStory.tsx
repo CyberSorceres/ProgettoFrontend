@@ -32,7 +32,7 @@ interface Project {
   client: string;
   startDate: string;
 }
-type TableEpicStoryProp = Omit<EpicStoryProp, 'userStoryArray'>;
+
 const columns: TableColumn<EpicStoryProp>[] = [
   {
     name: 'Name',

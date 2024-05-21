@@ -25,7 +25,7 @@ interface UserStoryProp{
 const EpicDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(null);
-  const [userStories, setEpicStories] = useState<UserStoryProp[]>([]);
+  const [userStories, setUserStories] = useState<UserStoryProp[]>([]);
   useEffect(() => {
     const fetchProject = async () => {
       // Sostituisci con il tuo endpoint API reale
@@ -35,7 +35,7 @@ const EpicDetails: React.FC = () => {
       const responseUser = await fetch(`/api/projects/${id}/user-stories`);
       const dataUser= await response.json();
       setEpicStories(data);*/
-	setProject({ id: 1, title: 'ChatGPT vs Bedrock', client: 'Zero12', startDate: '11/05/2024' , epicStory: {1: {
+	setUserStories({ id: 1, title: 'ChatGPT vs Bedrock', client: 'Zero12', startDate: '11/05/2024' , epicStory: {1: {
 	    
 	}}})
     };
@@ -43,12 +43,12 @@ const EpicDetails: React.FC = () => {
     fetchProject();
   }, [id]);
 
-  if (!project) {
+  if (!userStories) {
     return <div>Loading...</div>;
   }
 
   return (
-      <UserStory epicStory={project.epicStory[id]}></UserStory>
+      <UserStory userStory={userStories.id}></UserStory>
   );
 };
 

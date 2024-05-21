@@ -11,6 +11,7 @@ import {
   MDBInput,
 } from 'mdb-react-ui-kit';
 import './AddProject.css';
+import DropdownMenuContainer from './DropdownMenuContainer';
 
 interface Project {
   title: string;
@@ -40,7 +41,8 @@ const AddProjectButton: React.FC = () => {
       // Resetta lo stato del form
       setNewProject({ title: '', description: '' });
     };
-  
+
+
     return (
       <>
         <MDBBtn onClick={toggleModal}>Crea Nuovo Progetto</MDBBtn>
@@ -56,13 +58,14 @@ const AddProjectButton: React.FC = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="title" className="form-label">Titolo</label>
-                    <input type="text" className="form-control" id="title" name="title" value={newProject.title}  required />
+                    <input type="text" className="form-control" id="title" name="title" required   />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="description" className="form-label">Descrizione</label>
-                    <textarea className="form-control" id="description" name="description" value={newProject.description}  required></textarea>
+                    <textarea className="form-control" id="description" name="description" required ></textarea>
                   </div>
-                  
+                  <DropdownMenuContainer
+                />
                 </form>
               </MDBModalBody>
               <MDBModalFooter>

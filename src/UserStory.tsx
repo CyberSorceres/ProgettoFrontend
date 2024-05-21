@@ -112,7 +112,7 @@ const handleButtonClick = (row: UserStoryProp) => {
 const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [records, setRecords] = useState<any[]>([]);
+  const [userRecords, setRecords] = useState<any[]>([]);
 
 
   useEffect(() => {

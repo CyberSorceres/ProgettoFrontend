@@ -113,6 +113,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   useEffect(() => {
@@ -131,12 +132,19 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
 
     setRecords(flattenedRecords);
   }, [epicStory]);
+  
   function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newData = fakeData.filter(row => {
-      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
-    });
-    setRecords(newData);
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filteredRecords = fakeData.flatMap((item) =>
+      item.userStoryArray.filter((userStory) =>
+        userStory.name.toLowerCase().includes(value)
+      )
+    );
+    setRecords(filteredRecords);
   }
+
   return (
    
     <div>

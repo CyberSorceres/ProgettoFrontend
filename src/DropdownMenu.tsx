@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import './DropdownMenu.css';
 
 interface DropdownMenuProps {
@@ -9,6 +8,7 @@ interface DropdownMenuProps {
   onConfirm: () => void;
   onAddOption: (option: string) => void;
   onDeleteOption: (option: string) => void;
+  position: { top: number; left: number }; // Aggiungi prop per la posizione
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -18,6 +18,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   onConfirm,
   onAddOption,
   onDeleteOption,
+  position,
 }) => {
   const [newOption, setNewOption] = useState('');
 
@@ -29,7 +30,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   };
 
   return (
-    <div className="dropdown-menu">
+    <div className="dropdown-menu" style={{ top: position.top, left: position.left, position: 'absolute' }}>
       {options.map((option) => (
         <div key={option} className="dropdown-item">
           <label>

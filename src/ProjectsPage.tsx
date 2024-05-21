@@ -1,12 +1,12 @@
-import React from 'react';
-
-import ListEpicUserStory from './ListEpicUserStory';
+import { useState } from 'react';
+import Table from './Table';
 
 const ProjectsPage: React.FC = () => {
-  
+
+ 
   return (
-    <div>
-      <ListEpicUserStory />
+    <div >
+      <Table/>
     </div>
   );
 };

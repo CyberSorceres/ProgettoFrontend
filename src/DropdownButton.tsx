@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface DropdownButtonProps {
   onClick: () => void;
 }
 
-const DropdownButton: React.FC<DropdownButtonProps> = ({ onClick }) => {
+const DropdownButton = forwardRef<HTMLButtonElement, DropdownButtonProps>(({ onClick }, ref) => {
   return (
-    <button onClick={onClick}>
-      Apri Menu
-    </button>
+    <button onClick={onClick} ref={ref}>Toggle Menu</button>
   );
-};
+});
 
 export default DropdownButton;

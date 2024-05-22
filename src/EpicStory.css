@@ -3,11 +3,15 @@
     height: 20px;
 }
 
-.EpicStoryDiv {
-    display: flex; /* Abilita Flexbox sul div contenitore */
-    flex-direction: column; /* Imposta la direzione dei figli come colonna */
+
+
+div .EpicStoryDiv{
+    width: 80%;
+    margin: auto;
+    padding: 2em;
 }
 
-.UserStoryDiv {
-    margin-left: 50px; /* Aggiunge un margine sinistro di 20px al div UserStoryDiv */
+ .textSearch{
+    float: right;
+    height: 3em;
 }

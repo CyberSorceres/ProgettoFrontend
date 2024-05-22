@@ -8,8 +8,9 @@ import AddRequestButton from './AddRequestButton';
 const ListEpicUserStory: React.FC = () => {
   return (
     <div className="ListEpicUserStoryListDiv">
+      
         <EpicStory />
-        <AddRequestButton />
+       
     </div>
   )
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EpicStory from './EpicStory';
 import UserStory from './UserStory';
+import BackButton from './BackButton';
 
 interface Project {
   id: number;
@@ -48,7 +49,10 @@ const EpicDetails: React.FC = () => {
   }
 
   return (
+    <div>
+      
       <UserStory userStory={userStories.id}></UserStory>
+      </div>
   );
 };
 

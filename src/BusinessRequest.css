@@ -1,0 +1,37 @@
+
+div textarea.form-control{
+    resize: none;
+    height: 14em;
+    margin-top: 2em;
+}
+
+form button.btn{
+    background-color: #e78809;
+}
+
+
+div textarea.form-control:focus {
+    border-color: #e78809;
+    box-shadow: none;
+}
+
+div.divBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+}
+
+
+.modal{
+    --mdb-modal-width: 50%;
+}
+
+.btn-primary {
+    --mdb-btn-bg: #e78809;
+    --mdb-btn-box-shadow: 0 4px 9px -4px #e78809;
+    --mdb-btn-hover-bg: #e78809;
+    --mdb-btn-focus-bg: #e78809;
+    --mdb-btn-active-bg: #e78809;
+    --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(127, 73, 6, 0.3), 0 4px 18px 0 rgba(127, 73, 6, 0.3);
+}

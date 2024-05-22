@@ -5,12 +5,13 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
-
+import BackButton from './BackButton';
 import EpicStory from './EpicStory';
 import PopupFeedback from './PopupFeedback';
 import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
 import { useEffect } from 'react';
+
 
 import './UserStory.css'
 interface EpicStoryProp{
@@ -91,9 +92,15 @@ const columns: TableColumn<UserStoryProp>[] = [
     ),
   },
   {
-    name: 'Actions',
+    name: 'Selezione dev',
     cell: (row: UserStoryProp) => (
       <DropdownContainer/>
+    ),
+  },
+  {
+    name: 'feedback',
+    cell: (row: UserStoryProp) => (
+      <PopupFeedback/>
     ),
   },
 ];
@@ -106,6 +113,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   useEffect(() => {
@@ -124,25 +132,38 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
 
     setRecords(flattenedRecords);
   }, [epicStory]);
+  
+  function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filteredRecords = fakeData.flatMap((item) =>
+      item.userStoryArray.filter((userStory) =>
+        userStory.name.toLowerCase().includes(value)
+      )
+    );
+    setRecords(filteredRecords);
+  }
+
   return (
+   
     <div>
       
-      <div className="EpicStoryDiv">
-          
-          
-         
-          <PopupFeedback />
-          <DropdownContainer />
+      <div className="UserStoryDiv">
+          <BackButton />
+          <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}
         data={records}
         pagination
        
       />
+      
       </div>
       
       
     </div>
+   
   )
 };
 

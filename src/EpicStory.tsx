@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Table.css';
+import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
@@ -112,15 +113,17 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   return (
     <div>
       <div className="EpicStoryDiv">
-        <PopupFeedback />
-        <DropdownContainer />
-        <DataTable
-          columns={columns}
-          data={records}
-          highlightOnHover
-          pagination
-          onRowClicked={handleRowClick}
-        />
+        <BackButton />
+        <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
+          <DataTable
+        columns={columns}
+        data={records}
+        highlightOnHover
+        pagination
+        onRowClicked={handleRowClick}
+        
+      />
+
       </div>
     </div>
   );

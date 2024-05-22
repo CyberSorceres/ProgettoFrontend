@@ -7,7 +7,7 @@ import './DropdownMenu.css';
 const DropdownContainer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>(['Opzione 1', 'Opzione 2', 'Opzione 3']);
+  const [options, setOptions] = useState<string[]>(['Sviluppatore 1', 'Sviluppatore 2', 'Sviluppatore 3']);
   const [menuPosition, setMenuPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const buttonRef = useRef<HTMLButtonElement>(null);
 

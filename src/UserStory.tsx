@@ -88,7 +88,7 @@ const columns: TableColumn<UserStoryProp>[] = [
     name: 'Progress',
     selector: (row: UserStoryProp) => row.progress,
     cell: (row: UserStoryProp) => (
-      <progress className="progress-epic-story" value={row.progress} max="100" />
+      <progress className="progress-user-story" value={row.progress} max="100" />
     ),
   },
   {

@@ -4,7 +4,7 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
   
-
+import './BackButton.css'
 
   const BackButton: React.FC = () => {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ import {
       };
     return (
       <div>
-        <MDBBtn color='primary' onClick={handleGoBack}>Torna Indietro</MDBBtn>
+        <MDBBtn className='btnBack'  onClick={handleGoBack}>Torna Indietro</MDBBtn>
       </div>
     );
   };

@@ -12,6 +12,7 @@ import {
 } from 'mdb-react-ui-kit';
 import './AddProject.css';
 import DropdownMenuContainer from './DropdownMenuContainer';
+import CheckBox from './CheckBox';
 
 interface Project {
   title: string;
@@ -66,6 +67,7 @@ const AddProjectButton: React.FC = () => {
                   </div>
                   <DropdownMenuContainer
                 />
+                <CheckBox/>
                 </form>
               </MDBModalBody>
               <MDBModalFooter>

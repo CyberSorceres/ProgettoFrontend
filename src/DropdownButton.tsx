@@ -6,7 +6,7 @@ interface DropdownButtonProps {
 
 const DropdownButton = forwardRef<HTMLButtonElement, DropdownButtonProps>(({ onClick }, ref) => {
   return (
-    <button onClick={onClick} ref={ref}>Toggle Menu</button>
+    <button onClick={onClick} ref={ref}>Scegli sviluppatori</button>
   );
 });
 

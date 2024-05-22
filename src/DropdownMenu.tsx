@@ -49,7 +49,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           type="text"
           value={newOption}
           onChange={(e) => setNewOption(e.target.value)}
-          placeholder="Aggiungi opzione"
+          placeholder="Aggiungi sviluppatore"
         />
         <button onClick={handleAddOption}>Aggiungi</button>
       </div>

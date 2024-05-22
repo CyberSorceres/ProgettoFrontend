@@ -24,7 +24,7 @@ button {
   border: none; /* Nessun bordo */
   border-radius: 0.625em;
   box-sizing: border-box;
-  color: white; /* Colore del testo bianco */
+  color: rgb(0, 0, 0); /* Colore del testo bianco */
   cursor: pointer;
   display: inline-block;
   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -52,7 +52,7 @@ button:disabled {
 }
 
 button:hover {
-  color: white; /* Colore del testo bianco anche al passaggio del mouse */
+  color: rgb(0, 0, 0); /* Colore del testo bianco anche al passaggio del mouse */
   background-color: orange; /* Colore di sfondo arancione più scuro al passaggio del mouse */
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
@@ -71,19 +71,19 @@ progress {
 
 /* Stili specifici per Webkit (Chrome, Safari) */
 progress::-webkit-progress-bar {
-  background-color: #e7c28a; /* Colore dello sfondo della barra */
+  background-color: #f1c27c; /* Colore dello sfondo della barra */
 }
 
 progress::-webkit-progress-value {
-  background-color: #333; /* Colore della barra di progressione */
+  background-color: #15058e; /* Colore della barra di progressione */
 }
 
 /* Stili specifici per Firefox */
 progress::-moz-progress-bar {
-  background-color: #333; /* Colore della barra di progressione */
+  background-color: #15058e; /* Colore della barra di progressione */
 }
 
 /* Stili specifici per Internet Explorer e Edge */
 progress::-ms-fill {
-  background-color: #333; /* Colore della barra di progressione */
+  background-color: #15058e; /* Colore della barra di progressione */
 }

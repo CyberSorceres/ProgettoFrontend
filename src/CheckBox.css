@@ -1,0 +1,13 @@
+ .checkbox-container{
+    display: flex;
+    flex-direction: horizontal;
+    align-items: center;
+   
+}
+
+
+.label{
+    margin-left: 14em;
+    accent-color: #ff8400;
+   
+}

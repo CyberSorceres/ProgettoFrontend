@@ -23,7 +23,7 @@ const PopupFeedback: React.FC = () => {
       <button onClick={handleButtonClick}>Invia feedback</button>
       {isOpen && ReactDOM.createPortal(
         <div className="popup">
-          <h2>Titolo del Popup</h2>
+          <h2>Inserisci la tua richiesta</h2>
           <input type="text" value={inputValue} onChange={handleInputChange} />
           <button className="close-popup" onClick={handleCloseButtonClick}>Chiudi</button>
         </div>,

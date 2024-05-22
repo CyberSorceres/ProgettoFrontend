@@ -1,7 +1,10 @@
-.progress-user-story {
+/* src\UserStory.css */
+progress {
     width: 45%;
     height: 20px;
+    color: rgb(7, 7, 112);
 }
+
 div .UserStoryDiv{
     width: 80%;
     margin: auto;

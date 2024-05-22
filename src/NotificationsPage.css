@@ -42,14 +42,19 @@
   }
   
   .notification-detail button {
-    background-color: #f44336;
-    color: white;
+    color: black;
+    --mdb-btn-bg: #e78809;
+    --mdb-btn-box-shadow: 0 4px 9px -4px #e78809;
+    --mdb-btn-hover-bg: #e78809;
+    --mdb-btn-focus-bg: #e78809;
+    --mdb-btn-active-bg: #e78809;
+    --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(127, 73, 6, 0.3), 0 4px 18px 0 rgba(127, 73, 6, 0.3);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
   }
   
   .notification-detail button:hover {
-    background-color: #d32f2f;
+    background-color: #e78809;
   }
   

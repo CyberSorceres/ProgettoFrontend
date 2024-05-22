@@ -20,11 +20,11 @@ h1 {
 
 button {
   appearance: none;
-  background-color: transparent;
-  border: 0.125em solid #1A1A1A;
+  background-color: #e78809; /* Colore di sfondo arancione */
+  border: none; /* Nessun bordo */
   border-radius: 0.625em;
   box-sizing: border-box;
-  color: #3B3B3B;
+  color: white; /* Colore del testo bianco */
   cursor: pointer;
   display: inline-block;
   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -47,11 +47,13 @@ button {
 
 button:disabled {
   pointer-events: none;
+  background-color: #f5a623; /* Colore arancione più chiaro per i bottoni disabilitati */
+  color: #7a7a7a; /* Colore testo grigio per i bottoni disabilitati */
 }
 
 button:hover {
-  color: #fff;
-  background-color: #1A1A1A;
+  color: white; /* Colore del testo bianco anche al passaggio del mouse */
+  background-color: orange; /* Colore di sfondo arancione più scuro al passaggio del mouse */
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
@@ -59,4 +61,29 @@ button:hover {
 button:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+/* Stile generico per l'elemento progress */
+progress {
+  width: 100%;
+  height: 20px;
+}
+
+/* Stili specifici per Webkit (Chrome, Safari) */
+progress::-webkit-progress-bar {
+  background-color: #e7c28a; /* Colore dello sfondo della barra */
+}
+
+progress::-webkit-progress-value {
+  background-color: #333; /* Colore della barra di progressione */
+}
+
+/* Stili specifici per Firefox */
+progress::-moz-progress-bar {
+  background-color: #333; /* Colore della barra di progressione */
+}
+
+/* Stili specifici per Internet Explorer e Edge */
+progress::-ms-fill {
+  background-color: #333; /* Colore della barra di progressione */
 }

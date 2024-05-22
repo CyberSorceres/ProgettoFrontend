@@ -155,7 +155,6 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
           <DataTable
         columns={columns}
         data={records}
-        highlightOnHover
         pagination
        
       />

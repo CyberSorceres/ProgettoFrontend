@@ -1,37 +1,30 @@
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
-import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
+import './EpicStory.css';
 
-import './EpicStory.css'
-interface EpicStoryProp{
+interface EpicStoryProp {
   id: number;
   name: string;
   desc: string;
   progress: number;
   userStoryArray: UserStoryProp[];
 }
-interface UserStoryProp{
+
+interface UserStoryProp {
   id: number;
   name: string;
   desc: string;
   progress: number;
-  
 }
+
 interface EpicStoryProps {
   epicStory: EpicStoryProp;
-}
-interface Project {
-  id: number;
-  title: string;
-  client: string;
-  startDate: string;
 }
 
 const columns: TableColumn<EpicStoryProp>[] = [
@@ -54,20 +47,13 @@ const columns: TableColumn<EpicStoryProp>[] = [
   },
   {
     name: 'Actions',
-    cell: (row: EpicStoryProp) => (
-     <DropdownContainer />
-    ),
+    cell: (row: EpicStoryProp) => <DropdownContainer />,
   },
 ];
-const handleButtonClick = (row: EpicStoryProp) => {
-  // Handle button click logic here
-  console.log('Button clicked for row:', row);
-};
 
 const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
-  
-  const fakeData = [
+  const fakeData: EpicStoryProp[] = [
     {
       id: 1,
       name: 'ChatGPT vs Bedrock',
@@ -109,22 +95,24 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       ],
     },
   ];
+
   const navigate = useNavigate();
   const [records, setRecords] = useState<EpicStoryProp[]>(fakeData);
+
   const handleRowClick = (fakeData: UserStoryProp) => {
     navigate(`userstory/${fakeData.id}`);
   };
-  function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newData = fakeData.filter(row => {
+
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const newData = fakeData.filter((row) => {
       return row.name.toLowerCase().includes(event.target.value.toLowerCase());
     });
     setRecords(newData);
-  }
+  };
+
   return (
     <div>
-      
       <div className="EpicStoryDiv">
-          
         <BackButton />
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
@@ -135,11 +123,10 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         onRowClicked={handleRowClick}
         
       />
+
       </div>
-      
-      
     </div>
-  )
+  );
 };
 
 export default EpicStory;

@@ -1,46 +1,43 @@
-/* styles.css */
+/* DropdownMenu.css */
+/* Assicurati che il contenitore sia posizionato relativamente */
 .dropdown-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    padding: 10px;
-  }
-  
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
-  }
-  
-  .dropdown-item label {
-    cursor: pointer;
-  }
-  
-  .delete-button {
-    background: none;
-    border: none;
-    color: red;
-    cursor: pointer;
-  }
-  
-  .add-option {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .add-option input {
-    margin-right: 5px;
-    padding: 5px;
-  }
-  
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 1000; 
+  display: block; 
+}
+
+
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.add-option {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+

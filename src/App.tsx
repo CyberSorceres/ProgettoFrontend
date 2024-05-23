@@ -9,6 +9,7 @@ import NotificationsPage from "./NotificationsPage";
 import NavigationBar from "./NavigationBar";
 import ProjectDetails from "./ProjectDetails";
 import EpicDetails from "./EpicDetails";
+import Registrazione from "./Registrazione";
 import { createContext } from "react";
 import Login from "./Login";
 import { RequireAuth } from "./RequireAuth";
@@ -30,6 +31,10 @@ const App: React.FC = () => {
                 <ProjectsPage />{" "}
               </RequireAuth>
             }
+          />
+          <Route
+            path="/registrazione/*"
+            element={<Registrazione></Registrazione>}
           />
           <Route
             path="/project/:id"

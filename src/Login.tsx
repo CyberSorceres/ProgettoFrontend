@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { APIContext } from "./App";
-import EpicStory from "./EpicStory";
-import UserStory from "./UserStory";
-import BackButton from "./BackButton";
+import { Link } from 'react-router-dom';
+import "./Login.css";
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const api = useContext(APIContext);
@@ -24,7 +23,10 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   };
 
   return (
-    <div>
+    <>
+    
+    <div className="login">
+    <h3>Login</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="mail" className="form-label">
@@ -44,21 +46,26 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <textarea
+          <input
             className="form-control"
+            type="password"
             id="password"
             value={password}
             name="password"
             onChange={(event) => setPassword(event.target.value)}
             required
-          ></textarea>
+          ></input>
         </div>
         <div className="divErrore">{error}</div>
         <button type="submit" className="btn btn-primary">
           Accedi
         </button>
       </form>
+      <Link to="/registrazione/step1" className="passwordDimenticata">
+          Password Dimenticata
+        </Link>
     </div>
+    </>
   );
 };
 

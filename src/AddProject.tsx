@@ -8,6 +8,7 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
+  MDBRadio,
   MDBInput,
 } from 'mdb-react-ui-kit';
 import './AddProject.css';
@@ -64,8 +65,8 @@ const AddProjectButton: React.FC = () => {
                     <label htmlFor="description" className="form-label">Descrizione</label>
                     <textarea className="form-control" id="description" name="description" required ></textarea>
                   </div>
-                  <DropdownMenuContainer
-                />
+                  <MDBRadio name='radioAi' id='ChatGPT' value='ChatGPT' label='ChatGPT' inline />
+                  <MDBRadio name='radioAi' id='Bedrock' value='Bedrock' label='Bedrock' inline />
                 </form>
               </MDBModalBody>
               <MDBModalFooter>

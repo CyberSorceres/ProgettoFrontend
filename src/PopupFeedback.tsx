@@ -1,35 +1,54 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBRadio,
+  MDBInput,
+} from 'mdb-react-ui-kit';
 import './PopupFeedback.css';
 
 const PopupFeedback: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleButtonClick = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleModal = () => setOpenModal(!openModal);
 
-  const handleCloseButtonClick = () => {
-    setIsOpen(false);
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+   //invio commento
   };
 
   return (
-    <div>
-      <button onClick={handleButtonClick}>Invia feedback</button>
-      {isOpen && ReactDOM.createPortal(
-        <div className="popup">
-          <h2>Titolo del Popup</h2>
-          <input type="text" value={inputValue} onChange={handleInputChange} />
-          <button className="close-popup" onClick={handleCloseButtonClick}>Chiudi</button>
-        </div>,
-        document.body
-      )}
-    </div>
+   <> 
+  <MDBBtn onClick={toggleModal}>Feedback</MDBBtn>
+  
+  <MDBModal tabIndex='-1' modal open={openModal} centered>
+    <MDBModalDialog>
+      <MDBModalContent className='dialogContent'>
+        <MDBModalHeader>
+          <MDBModalTitle>Feedback</MDBModalTitle>
+          <button type="button" className="btn-close" onClick={toggleModal}></button>
+        </MDBModalHeader>
+        <MDBModalBody>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="feedback" className="form-label">Inserisci il tuo feedback per aiutarci a migliorare l'AI</label>
+              <textarea className="form-control" id="feedback" name="feedback" required ></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">Invia</button>
+              <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
+          </form>
+        </MDBModalBody>
+      </MDBModalContent>
+    </MDBModalDialog>
+  </MDBModal>
+  </>
   );
 };
 

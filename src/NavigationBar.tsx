@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './NavigationBar.css';
+import './index.css';
 
 const routeTitles: Record<string, string> = {
     '/': 'Progetti',

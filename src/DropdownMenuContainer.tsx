@@ -2,7 +2,7 @@ import React, { useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import DropdownButton from './DropdownButton';
 import DropdownMenu from './DropdownMenu';
-import './DropdownMenu.css';
+import './index.css';
 
 const DropdownContainer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

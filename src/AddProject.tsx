@@ -10,7 +10,7 @@ import {
   MDBModalFooter,
   MDBInput,
 } from 'mdb-react-ui-kit';
-import './AddProject.css';
+import './index.css';
 import DropdownMenuContainer from './DropdownMenuContainer';
 
 interface Project {

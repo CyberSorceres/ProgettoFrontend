@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
 import { MDBBtn } from 'mdb-react-ui-kit';
 
-import './BusinessRequest.css';
+import './index.css';
 import BackButton from './BackButton';
 
 

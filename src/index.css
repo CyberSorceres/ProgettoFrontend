@@ -87,3 +87,306 @@ progress::-moz-progress-bar {
 progress::-ms-fill {
   background-color: #333; /* Colore della barra di progressione */
 }
+
+/* AddProject.css */
+
+div .dialogContent{
+  background-color: white;
+
+}
+
+textarea{
+  resize: none;
+  height: 8em;
+}
+
+.modal{
+  --mdb-modal-width: 50%;
+}
+
+.btn-primary {
+  --mdb-btn-bg: #e78809;
+  --mdb-btn-box-shadow: 0 4px 9px -4px #e78809;
+  --mdb-btn-hover-bg: #e78809;
+  --mdb-btn-focus-bg: #e78809;
+  --mdb-btn-active-bg: #e78809;
+  --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(127, 73, 6, 0.3), 0 4px 18px 0 rgba(127, 73, 6, 0.3);
+}
+
+/* BusinessRequest.css */
+
+div textarea.form-control{
+  resize: none;
+  height: 14em;
+  margin-top: 2em;
+}
+
+form button.btn{
+  background-color: #e78809;
+}
+
+
+div textarea.form-control:focus {
+  border-color: #e78809;
+  box-shadow: none;
+}
+
+div.divBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+
+
+.modal{
+  --mdb-modal-width: 50%;
+}
+
+.btn-primary {
+  --mdb-btn-bg: #e78809;
+  --mdb-btn-box-shadow: 0 4px 9px -4px #e78809;
+  --mdb-btn-hover-bg: #e78809;
+  --mdb-btn-focus-bg: #e78809;
+  --mdb-btn-active-bg: #e78809;
+  --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(127, 73, 6, 0.3), 0 4px 18px 0 rgba(127, 73, 6, 0.3);
+}
+
+/* Comment.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.comment-list {
+  margin-bottom: 20px;
+}
+
+.comment {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* DropdownMenu.css */
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 1000; 
+  display: block; 
+}
+
+
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.add-option {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+/* EpicStory.css */
+
+.progress-epic-story {
+  width: 60%;
+  height: 20px;
+}
+
+
+
+div .EpicStoryDiv{
+  width: 80%;
+  margin: auto;
+  padding: 2em;
+}
+
+.textSearch{
+  float: right;
+  height: 3em;
+}
+
+/* ListEpicUserStory.css */
+
+.ListEpicUserStoryListDiv {
+  width: 100%;
+  margin-left: 25%;
+}
+.UserStoryDiv {
+  margin-left: 25%;
+}
+
+/* NavigationBar.css */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+}
+
+.right .button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.right .button:hover {
+  background-color: #777;
+}
+
+/* NotificationsPage.css */
+
+.notification-page {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Una colonna per la lista delle notifiche e una per le notifiche ingrandite */
+  gap: 20px; /* Spazio tra le colonne */
+}
+
+.notification-list-column {
+  /* Stile per la colonna delle notifiche */
+}
+
+.notification-list {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.notification {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification:hover {
+  background-color: #f0f0f0;
+}
+
+.notification-detail-column {
+  /* Stile per la colonna delle notifiche ingrandite */
+}
+
+.notification-detail {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.notification-detail h2 {
+  margin-top: 0;
+}
+
+.notification-detail p {
+  margin-bottom: 20px;
+}
+
+.notification-detail button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.notification-detail button:hover {
+  background-color: #d32f2f;
+}
+
+/* PopupFeedback.css */
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+/* Table.css */
+div .table{
+  width: 80%;
+  margin: auto;
+  padding: 2em;
+}
+
+div .textSearch{
+  float: right;
+  height: 3em;
+}
+
+/* UserStory.css */
+
+.progress-user-story {
+  width: 45%;
+  height: 20px;
+}
+div .UserStoryDiv{
+  width: 80%;
+  margin: auto;
+  padding: 2em;
+}
+
+div .textSearch{
+  float: right;
+  height: 3em;
+}

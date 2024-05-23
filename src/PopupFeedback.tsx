@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import './PopupFeedback.css';
+import './index.css';
 
 const PopupFeedback: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

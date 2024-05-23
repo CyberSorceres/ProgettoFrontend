@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
-import './Table.css';
+import './index.css';
 
 interface Project {
   id: number;

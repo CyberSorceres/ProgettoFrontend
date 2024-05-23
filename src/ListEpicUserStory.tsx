@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './ListEpicUserStory.css';
+import './index.css';
 
 import EpicStory from './EpicStory'; 
 import AddRequestButton from './AddRequestButton';

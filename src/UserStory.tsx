@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import './Table.css';
+import './index.css';
 import BackButton from './BackButton';
 import EpicStory from './EpicStory';
 import PopupFeedback from './PopupFeedback';
@@ -13,7 +13,7 @@ import DropdownContainer from './DropdownMenuContainer';
 import { useEffect } from 'react';
 
 
-import './UserStory.css'
+import './index.css'
 interface EpicStoryProp{
   id: number;
   name: string;

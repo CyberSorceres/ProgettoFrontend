@@ -16,7 +16,7 @@ export default NotificationsPage;
 
 import React, { useState } from 'react';
 
-import './NotificationsPage.css'
+import './index.css'
 
 // Interfaccia per il tipo di dati delle notifiche
 interface Notification {

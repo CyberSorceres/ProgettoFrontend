@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate, useParams } from 'react-router-dom';
-import './Table.css';
+import './index.css';
 import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
-import './EpicStory.css';
+import './index.css';
 
 interface EpicStoryProp {
   id: number;

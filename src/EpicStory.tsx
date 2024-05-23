@@ -29,6 +29,11 @@ interface EpicStoryProps {
 
 const columns: TableColumn<EpicStoryProp>[] = [
   {
+    name: 'Tag',
+    selector: (row: EpicStoryProp) => row.id,
+    cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+  },
+  {
     name: 'Name',
     selector: (row: EpicStoryProp) => row.name,
     cell: (row: EpicStoryProp) => <span>{row.name}</span>,
@@ -45,10 +50,10 @@ const columns: TableColumn<EpicStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
-  {
+  /*{
     name: 'Actions',
     cell: (row: EpicStoryProp) => <DropdownContainer />,
-  },
+  },*/
 ];
 
 const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {

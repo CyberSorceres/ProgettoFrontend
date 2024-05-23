@@ -50,8 +50,9 @@ const fakeData = [
         desc: 'Provide detailed information about AI models',
         progress: 80,
       },
-    ],
+   ],
   },
+
   {
     id: 2,
     name: 'Project Alpha',
@@ -74,6 +75,11 @@ const fakeData = [
   },
 ];
 const columns: TableColumn<UserStoryProp>[] = [
+  {
+    name: 'Tag',
+    selector: (row: UserStoryProp) => row.id,
+    cell: (row: UserStoryProp) => <span>{row.id}</span>,
+  },
   {
     name: 'Name',
     selector: (row: UserStoryProp) => row.name,
@@ -109,12 +115,21 @@ const handleButtonClick = (row: UserStoryProp) => {
   // Handle button click logic here
   console.log('Button clicked for row:', row);
 };
+
 const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
+  const handleToggleMenuOpen = () => {
+    setIsOverlayVisible(true);
+  };
+
+  const handleToggleMenuClose = () => {
+    setIsOverlayVisible(false);
+  };
 
   useEffect(() => {
     // Map over the userStoryArray in fakeData and create a new array of objects
@@ -149,7 +164,9 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
    
     <div>
       
-      <div className="UserStoryDiv">
+      <div className={`UserStoryDiv ${isOverlayVisible ? 'overlay-active' : ''}`}>
+      {isOverlayVisible && <div className="overlay" onClick={handleToggleMenuClose}></div>}
+      
           <BackButton />
           <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable

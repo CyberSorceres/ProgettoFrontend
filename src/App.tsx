@@ -13,6 +13,7 @@ import Registrazione from "./Registrazione";
 import { createContext } from "react";
 import Login from "./Login";
 import { RequireAuth } from "./RequireAuth";
+import UserDetails from "./UserDetails";
 
 export const APIContext = createContext<API | null>(null);
 
@@ -51,6 +52,15 @@ const App: React.FC = () => {
               <RequireAuth auth={login}>
                 {" "}
                 <EpicDetails />{" "}
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/project/:id/epicstory/:id/userstory/:id"
+            element={
+              <RequireAuth auth={login}>
+                {" "}
+                <UserDetails />{" "}
               </RequireAuth>
             }
           />

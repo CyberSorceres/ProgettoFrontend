@@ -97,18 +97,7 @@ const columns: TableColumn<UserStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
-  {
-    name: 'Selezione dev',
-    cell: (row: UserStoryProp) => (
-      <DropdownContainer/>
-    ),
-  },
-  {
-    name: 'feedback',
-    cell: (row: UserStoryProp) => (
-      <PopupFeedback/>
-    ),
-  },
+  
 ];
 
 const handleButtonClick = (row: UserStoryProp) => {
@@ -159,7 +148,9 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     );
     setRecords(filteredRecords);
   }
-
+  const handleRowClick = (fakeData: UserStoryProp) => {
+    navigate(`/project/:id/epicstory/:id/userstory/${fakeData.id}`);
+  };
   return (
    
     <div>
@@ -173,7 +164,8 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         columns={columns}
         data={records}
         pagination
-       
+        highlightOnHover
+        onRowClicked={handleRowClick}
       />
       
       </div>

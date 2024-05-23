@@ -9,12 +9,17 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const api = useContext(APIContext);
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError]=useState("");
   const navigate = useNavigate();
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (await api?.login(mail, password)) {
       onLogin();
       navigate("/");
+    }else{
+        setError("Utente non Riconosciuto, riprova");
     }
   };
 
@@ -48,6 +53,7 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
             required
           ></textarea>
         </div>
+        <div className="divErrore">{error}</div>
         <button type="submit" className="btn btn-primary">
           Accedi
         </button>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Step1: React.FC = () => {
@@ -21,6 +22,9 @@ const Step1: React.FC = () => {
             required
           />
       </form>
+      <Link to="/login" className="passwordDimenticata">
+          Torna a Login
+        </Link>
     </div>
   );
 };

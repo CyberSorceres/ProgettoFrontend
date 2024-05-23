@@ -47,13 +47,13 @@ button {
 
 button:disabled {
   pointer-events: none;
-  background-color: #f5a623; /* Colore arancione più chiaro per i bottoni disabilitati */
+  background-color: #ffffff; /* Colore arancione più chiaro per i bottoni disabilitati */
   color: #7a7a7a; /* Colore testo grigio per i bottoni disabilitati */
 }
 
 button:hover {
   color: white; /* Colore del testo bianco anche al passaggio del mouse */
-  background-color: orange; /* Colore di sfondo arancione più scuro al passaggio del mouse */
+  background-color: #e78809; /* Colore di sfondo arancione più scuro al passaggio del mouse */
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }

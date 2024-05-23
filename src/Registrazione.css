@@ -1,0 +1,35 @@
+div .divRegistrazione{
+    margin:auto;
+    margin-top: 3em;
+    width: 50%;
+}
+
+.divRegistrazione h3{
+    margin-bottom: 2em;
+}
+
+.divRegistrazione >div{
+    margin-bottom: 2em;
+}
+
+.divRegistrazione .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active, .divRegistrazione .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed, .divRegistrazione .css-18st3fs-MuiButtonBase-root-MuiButton-root 
+ {
+    color: #e4a11b;
+}
+
+.divRegistrazione .css-1f5ro5o-MuiButtonBase-root-MuiButton-root, .divRegistrazione .css-1f5ro5o-MuiButtonBase-root-MuiButton-root:hover{
+    background-color: #e4a11b;
+}
+
+div .passwordDimenticata{
+    color: rgba(0, 0, 0, .6);
+}
+
+div a{
+    font-weight: 400;
+}
+
+div a:hover{
+    color: #e78809;
+    text-decoration: underline;
+}

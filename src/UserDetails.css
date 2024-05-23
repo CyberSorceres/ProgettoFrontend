@@ -1,27 +1,19 @@
 .card {
     width: 50%;
-   
     border-radius: 20px;
     background: #f5f5f5;
     position: relative;
     padding: 1.8rem;
     border: 2px solid #c3c6ce;
-   
-    
-    
     margin: auto;
   }
   
   .card-details {
-    color: #e78809;
-    height: 100%;
-    gap: .5em;
-    display: grid;
-    place-content: center;
-    overflow:'hidden'; 
-    text-overflow:  'ellipsis';
-   
-    max-width: 500px;
+    
+    word-break: break-all;
+    word-wrap: break-word;
+    text-align: center;
+    
   }
   
  .divBtn{
@@ -34,6 +26,8 @@
   .text-body {
     color: rgb(134, 134, 134);
     width: '100%';
+    place-content: center;
+    
     word-wrap: break-word;
     
   }

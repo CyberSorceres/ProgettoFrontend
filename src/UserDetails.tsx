@@ -32,7 +32,7 @@ interface UserStoryProp{
 const fakeUser={
 
   name: 'User can view project details',
-  desc: 'Provide information about Project Alpha dssssssssssssssssssssssssssssssss sssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
+  desc: 'Provide information about Project Alpha dsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
 
 }
 
@@ -53,14 +53,11 @@ const UserDetails: React.FC = () => {
        <div className='divBtn'>
        <DropdownContainer />
        <PopupFeedback/>
+       <button>Split</button>
        </div>
        
      
       </div>
-      
-    
-    
-      
       
      </div>
     

@@ -42,7 +42,7 @@
   }
   
   .notification-detail button {
-    background-color: #f44336;
+    background-color: #e78809;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -50,6 +50,6 @@
   }
   
   .notification-detail button:hover {
-    background-color: #d32f2f;
+    background-color: #e78809;
   }
-  
+   

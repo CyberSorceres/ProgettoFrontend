@@ -46,7 +46,7 @@ const AddProjectButton: React.FC = () => {
 
     return (
       <>
-        <MDBBtn onClick={toggleModal}>Crea Nuovo Progetto</MDBBtn>
+        <button onClick={toggleModal}>Crea Nuovo Progetto</button>
   
         <MDBModal tabIndex='-1' modal open={openModal} centered>
           <MDBModalDialog>
@@ -70,8 +70,8 @@ const AddProjectButton: React.FC = () => {
                 </form>
               </MDBModalBody>
               <MDBModalFooter>
-              <button type="submit" className="btn btn-primary">Crea</button>
-                <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
+              <button type="submit" >Crea</button>
+                <button onClick={toggleModal}>Annulla</button>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>

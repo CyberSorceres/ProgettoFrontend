@@ -1,78 +1,33 @@
-
-import CommentContainer from './CommentContainer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
-import EpicStory from './EpicStory';
 import PopupFeedback from './PopupFeedback';
-import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
-import { useEffect } from 'react';
+import { fakeData } from './fakeData.ts';
+import './UserStory.css';
 
+interface UserStoryProp {
+  id: number;
+  name: string;
+  desc: string;
+  progress: number;
+}
 
-import './UserStory.css'
-interface EpicStoryProp{
+interface EpicStoryProp {
   id: number;
   name: string;
   desc: string;
   progress: number;
   userStoryArray: UserStoryProp[];
 }
-interface UserStoryProp{
-  id: number;
-  name: string;
-  desc: string;
-  progress: number;
-  
-}
+
 interface EpicStoryProps {
   epicStory: EpicStoryProp;
 }
-const fakeData = [
-  {
-    id: 1,
-    name: 'ChatGPT vs Bedrock',
-    desc: 'Comparison between ChatGPT and Bedrock',
-    progress: 0,
-    userStoryArray: [
-      {
-        id: 1,
-        name: 'User can compare models',
-        desc: 'Allow users to compare different AI models',
-        progress: 90,
-      },
-      {
-        id: 2,
-        name: 'User can view model details',
-        desc: 'Provide detailed information about AI models',
-        progress: 80,
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Project Alpha',
-    desc: 'Description of Project Alpha',
-    progress: 70,
-    userStoryArray: [
-      {
-        id: 1,
-        name: 'User can view project details',
-        desc: 'Provide information about Project Alpha',
-        progress: 60,
-      },
-      {
-        id: 2,
-        name: 'User can submit feedback',
-        desc: 'Allow users to provide feedback on Project Alpha',
-        progress: 30,
-      },
-    ],
-  },
-];
+
 const columns: TableColumn<UserStoryProp>[] = [
   {
     name: 'Name',
@@ -94,30 +49,34 @@ const columns: TableColumn<UserStoryProp>[] = [
   {
     name: 'Selezione dev',
     cell: (row: UserStoryProp) => (
-      <DropdownContainer/>
+      <DropdownContainer />
     ),
   },
   {
-    name: 'feedback',
+    name: 'Feedback',
     cell: (row: UserStoryProp) => (
-      <PopupFeedback/>
+      <PopupFeedback />
+    ),
+  },
+  {
+    name: 'Dettagli',
+    cell: (row: UserStoryProp) => (
+      <button onClick={() => handleButtonClick(row)}>Vedi Dettagli</button>
     ),
   },
 ];
 
-const handleButtonClick = (row: UserStoryProp) => {
-  // Handle button click logic here
-  console.log('Button clicked for row:', row);
+const handleButtonClick = (row: UserStoryProp, navigate) => {
+  navigate(`/userstory/${row.id}`);
 };
+
 const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-
   useEffect(() => {
-    // Map over the userStoryArray in fakeData and create a new array of objects
     const newRecords = fakeData.map((item) => {
       return item.userStoryArray.map((userStory) => {
         return {
@@ -132,7 +91,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
 
     setRecords(flattenedRecords);
   }, [epicStory]);
-  
+
   function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value.toLowerCase();
     setSearchTerm(value);
@@ -146,25 +105,30 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   }
 
   return (
-   
     <div>
-      
       <div className="UserStoryDiv">
-          <BackButton />
-          <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
-          <DataTable
-        columns={columns}
-        data={records}
-        pagination
-       
-      />
-      
+        <BackButton />
+        <div className='textSearch'>
+          <input type="text" placeholder="Search" onChange={handleFilter} />
+        </div>
+        <DataTable
+          columns={columns.map((col) => {
+            if (col.name === 'Dettagli') {
+              return {
+                ...col,
+                cell: (row) => (
+                  <button onClick={() => handleButtonClick(row, navigate)}>Vedi Dettagli</button>
+                ),
+              };
+            }
+            return col;
+          })}
+          data={records}
+          pagination
+        />
       </div>
-      
-      
     </div>
-   
-  )
+  );
 };
 
 export default UserStory;

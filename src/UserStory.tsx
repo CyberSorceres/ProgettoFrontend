@@ -158,7 +158,13 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       )
     );
     setRecords(filteredRecords);
-  }
+  };
+
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const handleRowClick = (row: UserStoryProp) => {
+    setSelectedRowId(row.id === selectedRowId ? null : row.id);
+  };
 
   return (
    
@@ -167,15 +173,29 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       <div className={`UserStoryDiv ${isOverlayVisible ? 'overlay-active' : ''}`}>
       {isOverlayVisible && <div className="overlay" onClick={handleToggleMenuClose}></div>}
       
-          <BackButton />
+          
           <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}
         data={records}
         pagination
+        highlightOnHover
+        onRowClicked={handleRowClick}
+        expandableRows
+          expandableRowsComponent={({ data }) => (
+            selectedRowId === data.id && (
+              <div className="row-details">
+                <p><strong>Description:</strong> {data.desc}</p>
+                <div className="actions">
+                  <DropdownContainer />
+                  <PopupFeedback />
+                </div>
+              </div>
+            )
+          )}
        
       />
-      
+      <BackButton />
       </div>
       
       

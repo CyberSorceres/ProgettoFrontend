@@ -7,6 +7,7 @@ import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
 import './EpicStory.css';
+import AddEpicStoryButton from './AddEpicStory';
 
 interface EpicStoryProp {
   id: number;
@@ -118,7 +119,8 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   return (
     <div>
       <div className="EpicStoryDiv">
-        <BackButton />
+        
+        <AddEpicStoryButton></AddEpicStoryButton>
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}
@@ -128,7 +130,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         onRowClicked={handleRowClick}
         
       />
-
+<BackButton />
       </div>
     </div>
   );

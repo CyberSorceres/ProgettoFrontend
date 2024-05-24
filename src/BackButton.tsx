@@ -13,7 +13,7 @@ import "./index.css";
       };
     return (
       <div className="backButton">
-        <MDBBtn  color='primary' onClick={handleGoBack}>Torna Indietro</MDBBtn>
+        <button  color='primary' onClick={handleGoBack}>Torna Indietro</button>
       </div>
     );
   };

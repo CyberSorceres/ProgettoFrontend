@@ -4,6 +4,7 @@ import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import "./Registrazione.css"
+import BackButton from './BackButton';
 
 const steps = ['Step 1', 'Step 2'];
 
@@ -17,37 +18,46 @@ const RegistrationStepper: React.FC = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
+  const [isStep1Valid, setIsStep1Valid] = useState(false);
 
   useEffect(() => {
     if (isFirstLoad) {
-        // Se è il primo caricamento, reindirizza allo step 1
-        navigate('/registrazione/step1');
-        setActiveStep(0);
-        setIsFirstLoad(false); // Imposta lo stato per indicare che il primo caricamento è avvenuto
-      } else {
-        // Aggiorna l'activeStep in base al percorso corrente
-        if (location.pathname === '/registrazione/step1') setActiveStep(0);
-        else if (location.pathname === '/registrazione/step2') setActiveStep(1);
-      }
-    }, [location, navigate, isFirstLoad]);
+      navigate('/registrazione/step1');
+      setActiveStep(0);
+      setIsFirstLoad(false);
+    } else {
+      if (location.pathname === '/registrazione/step1') setActiveStep(0);
+      else if (location.pathname === '/registrazione/step2') setActiveStep(1);
+    }
+  }, [location, navigate, isFirstLoad]);
+
+  useEffect(() => {
+    // Validate Step 1 data
+    if (formData.step1Data.email.trim() !== '') {
+      setIsStep1Valid(true);
+    } else {
+      setIsStep1Valid(false);
+    }
+  }, [formData.step1Data]);
 
   const handleNext = () => {
+    
     if (activeStep < steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       navigate(`/registrazione/step${activeStep + 2}`);
-    }else{
-        handleSubmit();
+    } else {
+      //handleSubmit();
     }
   };
 
-  const handleBack = () => {
+  /*const handleBack = () => {
     if (activeStep > 0) {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
       navigate(`/registrazione/step${activeStep}`);
     }else{
         navigate('/login');
     }
-  };
+  };*/
 
   const updateFormData = (step: string, data: any) => {
     setFormData((prevData) => ({
@@ -75,23 +85,11 @@ const RegistrationStepper: React.FC = () => {
         ))}
       </Stepper>
       <Routes>
-        <Route path="step1" element={<Step1 data={formData.step1Data} updateData={(data: any) => updateFormData('step1Data', data)} />} />
-        <Route path="step2" element={<Step2 data={formData.step1Data} updateData={(data: any) => updateFormData('step1Data', data)} />} />
+        <Route path="step1" element={<Step1 data={formData.step1Data} updateData={(data: any) => updateFormData('step1Data', data)}
+              onSubmit={handleNext} />} />
+        <Route path="step2" element={<Step2 data={formData.step2Data} updateData={(data: any) => updateFormData('step2Data', data)} onSubmit={handleNext}/>} />
       </Routes>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          onClick={handleBack}
-          sx={{ mt: 1, mr: 1 }}
-        >
-          Back
-        </Button>
-        <Button
-          variant="contained"
-          onClick={handleNext}
-          sx={{ mt: 1, mr: 1 }}
-        >
-          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-        </Button>
       </Box>
     </Box>
     </>

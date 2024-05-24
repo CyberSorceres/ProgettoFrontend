@@ -92,3 +92,20 @@ div.backButton{
   margin-top: 2em;
   float: right;
 }
+
+.nextBtn{
+  margin-top: 3em;
+  float:right;
+}
+div.container>button{
+   align-items: baseline;
+}
+
+.divPassword{
+  display: flex;
+  align-items: center;
+}
+
+svg{
+  margin-left: 1em;
+}

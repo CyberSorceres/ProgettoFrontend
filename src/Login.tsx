@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { APIContext } from "./App";
 import { Link } from 'react-router-dom';
 import "./Login.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const api = useContext(APIContext);
@@ -18,8 +20,14 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
       onLogin();
       navigate("/");
     }else{
-        setError("Utente non Riconosciuto, riprova");
+        setError("Utente non esistente, riprova");
     }
+  };
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevVisible) => !prevVisible);
   };
 
   return (
@@ -42,22 +50,27 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
             required
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 ">
           <label htmlFor="password" className="form-label">
             Password
           </label>
+          <div className="divPassword">
           <input
-            className="form-control"
-            type="password"
-            id="password"
-            value={password}
-            name="password"
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          ></input>
+        type={passwordVisible ? "text" : "password"}
+        id="passwordField"
+        name="password"
+        className="form-control"
+        onChange={(event) => setPassword(event.target.value)}
+        required
+      />
+      <FontAwesomeIcon
+        icon={passwordVisible ? faEyeSlash : faEye}
+        onClick={togglePasswordVisibility}
+        style={{ cursor: 'pointer' }}
+      /></div>
         </div>
         <div className="divErrore">{error}</div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" >
           Accedi
         </button>
       </form>

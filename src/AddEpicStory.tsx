@@ -66,7 +66,7 @@ const AddEpicStoryButton: React.FC = () => {
               </MDBModalBody>
               <MDBModalFooter>
               <button type="submit" className="btn btn-primary">Crea</button>
-                <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
+                <button onClick={toggleModal}>Annulla</button>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>

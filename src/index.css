@@ -106,6 +106,10 @@ div.container>button{
   align-items: center;
 }
 
+div.divErrore{
+  color: #e78809;
+}
+
 svg{
   margin-left: 1em;
 }

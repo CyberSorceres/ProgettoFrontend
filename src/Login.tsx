@@ -3,14 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { APIContext } from "./App";
 import { Link } from 'react-router-dom';
 import "./Login.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Password from "./Password";
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const api = useContext(APIContext);
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError]=useState("");
+  const [error, setError] = React.useState<string | null>(null);
   const navigate = useNavigate();
 
 
@@ -24,10 +23,8 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
     }
   };
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible((prevVisible) => !prevVisible);
+  const handleBlur = () => {
+    setError(null);
   };
 
   return (
@@ -50,26 +47,8 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
             required
           />
         </div>
-        <div className="mb-3 ">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <div className="divPassword">
-          <input
-        type={passwordVisible ? "text" : "password"}
-        id="passwordField"
-        name="password"
-        className="form-control"
-        onChange={(event) => setPassword(event.target.value)}
-        required
-      />
-      <FontAwesomeIcon
-        icon={passwordVisible ? faEyeSlash : faEye}
-        onClick={togglePasswordVisibility}
-        style={{ cursor: 'pointer' }}
-      /></div>
-        </div>
-        <div className="divErrore">{error}</div>
+        <Password password={password} setPassword={setPassword} label={'Password'} onBlur={handleBlur}/>
+        {error && <div className="divErrore">{error}</div>}
         <button type="submit" className="btn btn-primary" >
           Accedi
         </button>

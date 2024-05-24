@@ -26,7 +26,7 @@ const PopupFeedback: React.FC = () => {
 
   return (
    <> 
-  <MDBBtn onClick={toggleModal}>Feedback</MDBBtn>
+  <button onClick={toggleModal}>Feedback</button>
   
   <MDBModal tabIndex='-1' modal open={openModal} centered>
     <MDBModalDialog>
@@ -42,7 +42,7 @@ const PopupFeedback: React.FC = () => {
               <textarea className="form-control" id="feedback" name="feedback" required ></textarea>
             </div>
             <button type="submit" className="btn btn-primary">Invia</button>
-              <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
+              <button onClick={toggleModal}>Annulla</button>
           </form>
         </MDBModalBody>
       </MDBModalContent>

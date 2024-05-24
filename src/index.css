@@ -113,3 +113,17 @@ div.divErrore{
 svg{
   margin-left: 1em;
 }
+
+div.ptcNo{
+  min-width: unset;
+}
+
+div.ptcNo button{
+  padding: 0.8em;
+}
+
+button.ubHnu:hover:not(:disabled), button.ubHnu:focus{
+  background-color: rgba(0, 0, 0, 0);
+  color:rgba(0, 0, 0, .54);
+  box-shadow:rgba(0, 0, 0, 0)  0 0px 0px;
+}

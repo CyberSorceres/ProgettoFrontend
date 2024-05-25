@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
 import './Table.css';
 import './EpicStory.css';
+import AddRequestButton from './AddRequestButton';
 
 interface Project {
   id: number;
@@ -50,7 +51,9 @@ const ProjectsTable: React.FC = () => {
 
   return (
     <div className='container mt-5 table'>
-        <AddProjectButton/>
+       {// <AddProjectButton/>
+}
+        <AddRequestButton></AddRequestButton>
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
       <DataTable
         columns={columns}

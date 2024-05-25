@@ -14,6 +14,7 @@ import { createContext } from "react";
 import Login from "./Login";
 import { RequireAuth } from "./RequireAuth";
 import NotFound from "./NotFound";
+import BusinessRequest from "./BusinessRequest";
 export const APIContext = createContext<API | null>(null);
 
 const App: React.FC = () => {
@@ -42,6 +43,15 @@ const App: React.FC = () => {
               <RequireAuth auth={login}>
                 {" "}
                 <ProjectDetails />{" "}
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/businessRequest"
+            element={
+              <RequireAuth auth={login}>
+                {" "}
+                <BusinessRequest />{" "}
               </RequireAuth>
             }
           />

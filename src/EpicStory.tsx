@@ -33,6 +33,7 @@ const columns: TableColumn<EpicStoryProp>[] = [
     name: 'Tag',
     selector: (row: EpicStoryProp) => row.id,
     cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    width:'10%',
     sortable: true,
   },
   {
@@ -124,6 +125,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       <div className="EpicStoryDiv">
         
         <AddEpicStoryButton></AddEpicStoryButton>
+
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}

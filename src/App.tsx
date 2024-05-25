@@ -13,7 +13,7 @@ import Registrazione from "./Registrazione";
 import { createContext } from "react";
 import Login from "./Login";
 import { RequireAuth } from "./RequireAuth";
-
+import NotFound from "./NotFound";
 export const APIContext = createContext<API | null>(null);
 
 const App: React.FC = () => {
@@ -73,6 +73,7 @@ const App: React.FC = () => {
               />
             }
           />
+           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </APIContext.Provider>

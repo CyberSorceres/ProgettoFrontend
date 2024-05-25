@@ -22,7 +22,7 @@ button {
   appearance: none;
   background-color: #e78809; /* Colore di sfondo arancione */
   border: none; /* Nessun bordo */
-  border-radius: 0.625em;
+  border-radius: 0.5em;
   box-sizing: border-box;
   color: white; /* Colore del testo bianco */
   cursor: pointer;
@@ -129,7 +129,64 @@ button.ubHnu:hover:not(:disabled), button.ubHnu:focus{
 }
 
 div.row-details{
-  margin-top: 2em;
+  margin-top: 1.3em;
   margin-bottom: 1em;
   margin-left: 15%;
+  overflow-wrap: anywhere;
+  display: flex;
+}
+
+div.jDljLp{
+  font-size: unset;
+}
+
+div.block{
+  display: block;
+}
+
+.buttonDividi{
+  margin-left: 15%;
+  margin-top: 1.3em;
+}
+
+div .feedback, div .block button{
+  float: right;
+  display: flex;
+}
+
+div .feedback button, div.block button{
+  height: auto;
+  overflow-wrap: normal;
+}
+
+div .data-table-wrapper {
+  max-width: 100%;
+}
+
+div.Nfhbm{
+  overflow: hidden;
+}
+
+div .BAfJj {
+  display: contents;
+}
+/* Assicurati che le colonne si adattino alla larghezza disponibile */
+div .data-table {
+  width: 100%;
+  table-layout: fixed; /* Optional: Keeps column widths consistent */
+}
+
+div .data-table th, .data-table td {
+  overflow: hidden;
+  text-overflow: ellipsis; /* Optional: Adds ellipsis for overflowing text */
+  white-space: nowrap; /* Optional: Prevents text from wrapping to the next line */
+}
+
+.buttonDividi, .row-details button{
+  font-size: 12px;
+}
+
+p{
+  width: 100%;
+  font-size: 13px;
 }

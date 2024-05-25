@@ -33,11 +33,14 @@ const columns: TableColumn<EpicStoryProp>[] = [
     name: 'Tag',
     selector: (row: EpicStoryProp) => row.id,
     cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    sortable: true,
   },
   {
     name: 'Name',
     selector: (row: EpicStoryProp) => row.name,
     cell: (row: EpicStoryProp) => <span>{row.name}</span>,
+    sortable: true,
+
   },
   {
     name: 'Description',

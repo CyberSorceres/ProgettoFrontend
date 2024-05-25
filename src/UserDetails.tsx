@@ -7,14 +7,25 @@ interface RowDetailsProps {
 }
 
 const RowDetails: React.FC<RowDetailsProps> = ({ data }) => {
+
+    const handleSplit= () =>{
+
+    };
+
   return (
+    <>
+    <button onClick={handleSplit} className='buttonDividi'>Dividi</button>
+
     <div className="row-details">
-      <p><strong>Descrizione:</strong> {data.desc}</p>
-      <div className="actions">
-        <DropdownContainer />
-        <PopupFeedback />
-      </div>
+        <p><strong>Descrizione:</strong> {data.desc}</p>
+        <div className='block'>
+            <DropdownContainer />
+            <div className="feedback">
+                <PopupFeedback />
+            </div>
+        </div>
     </div>
+    </>
   );
 };
 

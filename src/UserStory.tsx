@@ -47,7 +47,7 @@ const fakeData = [
       {
         id: 2,
         name: 'User can view model details',
-        desc: 'Provide detailed information about AI models',
+        desc: 'Provide detailed information about AI models aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
         progress: false,
       },
    ],
@@ -60,13 +60,13 @@ const fakeData = [
     progress: 70,
     userStoryArray: [
       {
-        id: 1,
+        id: 3,
         name: 'User can view project details',
         desc: 'Provide information about Project Alpha',
         progress: false,
       },
       {
-        id: 2,
+        id: 4,
         name: 'User can submit feedback',
         desc: 'Allow users to provide feedback on Project Alpha',
         progress: true,
@@ -74,17 +74,22 @@ const fakeData = [
     ],
   },
 ];
+const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
+
 const columns: TableColumn<UserStoryProp>[] = [
+  
   {
     name: 'Tag',
     selector: (row: UserStoryProp) => row.id,
     cell: (row: UserStoryProp) => <span>{row.id}</span>,
     width:'10%',
+    sortable: true,
   },
   {
     name: 'Titolo',
     selector: (row: UserStoryProp) => row.name,
     cell: (row: UserStoryProp) => <span>{row.name}</span>,
+    sortable: true,
   },
 
   {
@@ -98,8 +103,8 @@ const columns: TableColumn<UserStoryProp>[] = [
         <i className="fas fa-times" style={{ color: 'red' }} />
       )}
     </span>    ),
-    width:'10%',
-
+    width:'15%',
+    sortable: true,
   },
 
 ];
@@ -109,7 +114,6 @@ const handleButtonClick = (row: UserStoryProp) => {
   console.log('Button clicked for row:', row);
 };
 
-const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
@@ -158,6 +162,20 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     setSelectedRowId(row.id === selectedRowId ? null : row.id);
   };
 
+  const handleRowExpandToggled = (expanded: boolean, row: UserStoryProp) => {
+    setSelectedRowId(expanded ? row.id : null);
+  };
+
+  const customExpanderIcon = (row: UserStoryProp) => (
+    <div onClick={() => handleRowClick(row)}>
+      {selectedRowId === row.id ? (
+        <i className="fas fa-chevron-up" />
+      ) : (
+        <i className="fas fa-chevron-down" />
+      )}
+    </div>
+  );
+
   return (
    
     <div>
@@ -167,16 +185,20 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       
           
           <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
-          <DataTable
+        <div className='data-table-wrapper'>
+        <DataTable
         columns={columns}
         data={records}
         pagination
         expandOnRowClicked
         highlightOnHover
         expandableRows
+        onRowClicked={handleRowClick}
+        onRowExpandToggled={handleRowExpandToggled}
+        expandableRowExpanded={(row) => row.id === selectedRowId}
        expandableRowsComponent={({ data }) => <RowDetails data={data} />}
-       
-      />
+       />
+       </div>
       <BackButton />
       </div>
       

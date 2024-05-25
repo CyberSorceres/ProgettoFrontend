@@ -11,7 +11,7 @@ import PopupFeedback from './PopupFeedback';
 import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
 import { useEffect } from 'react';
-
+import RowDetails from './UserDetails';
 
 import './UserStory.css'
 interface EpicStoryProp{
@@ -25,7 +25,7 @@ interface UserStoryProp{
   id: number;
   name: string;
   desc: string;
-  progress: number;
+  progress: boolean;
   
 }
 interface EpicStoryProps {
@@ -42,13 +42,13 @@ const fakeData = [
         id: 1,
         name: 'User can compare models',
         desc: 'Allow users to compare different AI models',
-        progress: 90,
+        progress: true,
       },
       {
         id: 2,
         name: 'User can view model details',
         desc: 'Provide detailed information about AI models',
-        progress: 80,
+        progress: false,
       },
    ],
   },
@@ -63,13 +63,13 @@ const fakeData = [
         id: 1,
         name: 'User can view project details',
         desc: 'Provide information about Project Alpha',
-        progress: 60,
+        progress: false,
       },
       {
         id: 2,
         name: 'User can submit feedback',
         desc: 'Allow users to provide feedback on Project Alpha',
-        progress: 30,
+        progress: true,
       },
     ],
   },
@@ -79,36 +79,29 @@ const columns: TableColumn<UserStoryProp>[] = [
     name: 'Tag',
     selector: (row: UserStoryProp) => row.id,
     cell: (row: UserStoryProp) => <span>{row.id}</span>,
+    width:'10%',
   },
   {
-    name: 'Name',
+    name: 'Titolo',
     selector: (row: UserStoryProp) => row.name,
     cell: (row: UserStoryProp) => <span>{row.name}</span>,
   },
+
   {
-    name: 'Description',
-    selector: (row: UserStoryProp) => row.desc,
-    cell: (row: UserStoryProp) => <span>{row.desc}</span>,
-  },
-  {
-    name: 'Progress',
+    name: 'Finita',
     selector: (row: UserStoryProp) => row.progress,
     cell: (row: UserStoryProp) => (
-      <progress className="progress-epic-story" value={row.progress} max="100" />
-    ),
+      <span>
+      {row.progress ? (
+        <i className="fas fa-check" style={{ color: 'green' }} />
+      ) : (
+        <i className="fas fa-times" style={{ color: 'red' }} />
+      )}
+    </span>    ),
+    width:'10%',
+
   },
-  {
-    name: 'Selezione dev',
-    cell: (row: UserStoryProp) => (
-      <DropdownContainer/>
-    ),
-  },
-  {
-    name: 'feedback',
-    cell: (row: UserStoryProp) => (
-      <PopupFeedback/>
-    ),
-  },
+
 ];
 
 const handleButtonClick = (row: UserStoryProp) => {
@@ -121,6 +114,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const handleToggleMenuOpen = () => {
@@ -160,9 +154,7 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     setRecords(filteredRecords);
   };
 
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  const handleRowClick = (row: UserStoryProp) => {
+  const handleRowClick = (row:UserStoryProp) => {
     setSelectedRowId(row.id === selectedRowId ? null : row.id);
   };
 
@@ -179,20 +171,10 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         columns={columns}
         data={records}
         pagination
+        expandOnRowClicked
         highlightOnHover
-        onRowClicked={handleRowClick}
         expandableRows
-          expandableRowsComponent={({ data }) => (
-            selectedRowId === data.id && (
-              <div className="row-details">
-                <p><strong>Description:</strong> {data.desc}</p>
-                <div className="actions">
-                  <DropdownContainer />
-                  <PopupFeedback />
-                </div>
-              </div>
-            )
-          )}
+       expandableRowsComponent={({ data }) => <RowDetails data={data} />}
        
       />
       <BackButton />

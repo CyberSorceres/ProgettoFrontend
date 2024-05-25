@@ -127,3 +127,9 @@ button.ubHnu:hover:not(:disabled), button.ubHnu:focus{
   color:rgba(0, 0, 0, .54);
   box-shadow:rgba(0, 0, 0, 0)  0 0px 0px;
 }
+
+div.row-details{
+  margin-top: 2em;
+  margin-bottom: 1em;
+  margin-left: 15%;
+}

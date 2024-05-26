@@ -7,6 +7,7 @@ import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
 import './EpicStory.css';
+import AddEpicStoryButton from './AddEpicStory';
 
 interface EpicStoryProp {
   id: number;
@@ -29,9 +30,18 @@ interface EpicStoryProps {
 
 const columns: TableColumn<EpicStoryProp>[] = [
   {
+    name: 'Tag',
+    selector: (row: EpicStoryProp) => row.id,
+    cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    width:'10%',
+    sortable: true,
+  },
+  {
     name: 'Name',
     selector: (row: EpicStoryProp) => row.name,
     cell: (row: EpicStoryProp) => <span>{row.name}</span>,
+    sortable: true,
+
   },
   {
     name: 'Description',
@@ -45,10 +55,10 @@ const columns: TableColumn<EpicStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
-  {
+  /*{
     name: 'Actions',
     cell: (row: EpicStoryProp) => <DropdownContainer />,
-  },
+  },*/
 ];
 
 const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
@@ -113,7 +123,9 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   return (
     <div>
       <div className="EpicStoryDiv">
-        <BackButton />
+        
+        <AddEpicStoryButton></AddEpicStoryButton>
+
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}
@@ -123,7 +135,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
         onRowClicked={handleRowClick}
         
       />
-
+<BackButton />
       </div>
     </div>
   );

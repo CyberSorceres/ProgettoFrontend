@@ -11,7 +11,7 @@ import PopupFeedback from './PopupFeedback';
 import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
 import { useEffect } from 'react';
-
+import RowDetails from './UserDetails';
 
 import './UserStory.css'
 interface EpicStoryProp{
@@ -25,7 +25,7 @@ interface UserStoryProp{
   id: number;
   name: string;
   desc: string;
-  progress: number;
+  progress: boolean;
   
 }
 interface EpicStoryProps {
@@ -42,16 +42,17 @@ const fakeData = [
         id: 1,
         name: 'User can compare models',
         desc: 'Allow users to compare different AI models',
-        progress: 90,
+        progress: true,
       },
       {
         id: 2,
         name: 'User can view model details',
-        desc: 'Provide detailed information about AI models',
-        progress: 80,
+        desc: 'Provide detailed information about AI models aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        progress: false,
       },
-    ],
+   ],
   },
+
   {
     id: 2,
     name: 'Project Alpha',
@@ -59,62 +60,74 @@ const fakeData = [
     progress: 70,
     userStoryArray: [
       {
-        id: 1,
+        id: 3,
         name: 'User can view project details',
         desc: 'Provide information about Project Alpha',
-        progress: 60,
+        progress: false,
       },
       {
-        id: 2,
+        id: 4,
         name: 'User can submit feedback',
         desc: 'Allow users to provide feedback on Project Alpha',
-        progress: 30,
+        progress: true,
       },
     ],
   },
 ];
+const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
+
 const columns: TableColumn<UserStoryProp>[] = [
+  
   {
-    name: 'Name',
+    name: 'Tag',
+    selector: (row: UserStoryProp) => row.id,
+    cell: (row: UserStoryProp) => <span>{row.id}</span>,
+    width:'10%',
+    sortable: true,
+  },
+  {
+    name: 'Titolo',
     selector: (row: UserStoryProp) => row.name,
     cell: (row: UserStoryProp) => <span>{row.name}</span>,
+    sortable: true,
   },
+
   {
-    name: 'Description',
-    selector: (row: UserStoryProp) => row.desc,
-    cell: (row: UserStoryProp) => <span>{row.desc}</span>,
-  },
-  {
-    name: 'Progress',
+    name: 'Finita',
     selector: (row: UserStoryProp) => row.progress,
     cell: (row: UserStoryProp) => (
-      <progress className="progress-epic-story" value={row.progress} max="100" />
-    ),
+      <span>
+      {row.progress ? (
+        <i className="fas fa-check" style={{ color: 'green' }} />
+      ) : (
+        <i className="fas fa-times" style={{ color: 'red' }} />
+      )}
+    </span>    ),
+    width:'15%',
+    sortable: true,
   },
-  {
-    name: 'Selezione dev',
-    cell: (row: UserStoryProp) => (
-      <DropdownContainer/>
-    ),
-  },
-  {
-    name: 'feedback',
-    cell: (row: UserStoryProp) => (
-      <PopupFeedback/>
-    ),
-  },
+
 ];
 
 const handleButtonClick = (row: UserStoryProp) => {
   // Handle button click logic here
   console.log('Button clicked for row:', row);
 };
-const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [records, setRecords] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
+  const handleToggleMenuOpen = () => {
+    setIsOverlayVisible(true);
+  };
+
+  const handleToggleMenuClose = () => {
+    setIsOverlayVisible(false);
+  };
 
   useEffect(() => {
     // Map over the userStoryArray in fakeData and create a new array of objects
@@ -143,22 +156,50 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
       )
     );
     setRecords(filteredRecords);
-  }
+  };
+
+  const handleRowClick = (row:UserStoryProp) => {
+    setSelectedRowId(row.id === selectedRowId ? null : row.id);
+  };
+
+  const handleRowExpandToggled = (expanded: boolean, row: UserStoryProp) => {
+    setSelectedRowId(expanded ? row.id : null);
+  };
+
+  const customExpanderIcon = (row: UserStoryProp) => (
+    <div onClick={() => handleRowClick(row)}>
+      {selectedRowId === row.id ? (
+        <i className="fas fa-chevron-up" />
+      ) : (
+        <i className="fas fa-chevron-down" />
+      )}
+    </div>
+  );
 
   return (
    
     <div>
       
-      <div className="UserStoryDiv">
-          <BackButton />
+      <div className={`UserStoryDiv ${isOverlayVisible ? 'overlay-active' : ''}`}>
+      {isOverlayVisible && <div className="overlay" onClick={handleToggleMenuClose}></div>}
+      
+          
           <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
-          <DataTable
+        <div className='data-table-wrapper'>
+        <DataTable
         columns={columns}
         data={records}
         pagination
-       
-      />
-      
+        expandOnRowClicked
+        highlightOnHover
+        expandableRows
+        onRowClicked={handleRowClick}
+        onRowExpandToggled={handleRowExpandToggled}
+        expandableRowExpanded={(row) => row.id === selectedRowId}
+       expandableRowsComponent={({ data }) => <RowDetails data={data} />}
+       />
+       </div>
+      <BackButton />
       </div>
       
       

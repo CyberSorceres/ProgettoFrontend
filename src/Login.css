@@ -1,0 +1,25 @@
+div .login{
+    width: 50%;
+    margin: auto;
+    margin-top: 3em;
+}
+
+div .login h3{
+    margin-bottom: 2em;
+    align-self: center;
+}
+
+div .login .passwordDimenticata{
+    float: right;
+    color: rgba(0, 0, 0, .6);
+}
+
+.login a{
+    font-weight: 400;
+}
+
+.login a:hover{
+    color: #e78809;
+    text-decoration: underline;
+}
+

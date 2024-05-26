@@ -14,20 +14,20 @@ import {
 import './AddProject.css';
 import DropdownMenuContainer from './DropdownMenuContainer';
 
-interface Project {
-  title: string;
+interface EpicStory {
   description: string;
+
 }
 
-const AddProjectButton: React.FC = () => {
+const AddEpicStoryButton: React.FC = () => {
     const [openModal, setOpenModal] = useState(false);
-    const [newProject, setNewProject] = useState<Project>({ title: '', description: '' });
+    const [newEpic, setNewEpic] = useState<EpicStory>({ description: '' });
   
     const toggleModal = () => setOpenModal(!openModal);
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setNewProject(prevState => ({
+      setNewEpic(prevState => ({
         ...prevState,
         [name]: value,
       }));
@@ -36,42 +36,37 @@ const AddProjectButton: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       // Aggiungi qui la logica per inviare i dati del nuovo progetto al backend
-      console.log('Nuovo progetto:', newProject);
+      console.log('Nuova Epic Story:', newEpic);
       // Chiudi il modal dopo l'invio del form
       setOpenModal(false);
       // Resetta lo stato del form
-      setNewProject({ title: '', description: '' });
+      setNewEpic({ description: '' });
     };
 
 
     return (
       <>
-        <MDBBtn onClick={toggleModal}>Crea Nuovo Progetto</MDBBtn>
+        <MDBBtn onClick={toggleModal}>Crea Nuova Epic Story</MDBBtn>
   
         <MDBModal tabIndex='-1' modal open={openModal} centered>
           <MDBModalDialog>
             <MDBModalContent className='dialogContent'>
               <MDBModalHeader>
-                <MDBModalTitle>Crea Nuovo Progetto</MDBModalTitle>
+                <MDBModalTitle>Crea nuova Epic Story</MDBModalTitle>
                 <button type="button" className="btn-close" onClick={toggleModal}></button>
               </MDBModalHeader>
               <MDBModalBody>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Titolo</label>
-                    <input type="text" className="form-control" id="title" name="title" required   />
-                  </div>
-                  <div className="mb-3">
                     <label htmlFor="description" className="form-label">Descrizione</label>
                     <textarea className="form-control" id="description" name="description" required ></textarea>
                   </div>
-                  <MDBRadio name='radioAi' id='ChatGPT' value='ChatGPT' label='ChatGPT' inline />
-                  <MDBRadio name='radioAi' id='Bedrock' value='Bedrock' label='Bedrock' inline />
+                  
                 </form>
               </MDBModalBody>
               <MDBModalFooter>
               <button type="submit" className="btn btn-primary">Crea</button>
-                <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
+                <button onClick={toggleModal}>Annulla</button>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>
@@ -80,4 +75,4 @@ const AddProjectButton: React.FC = () => {
     );
   };
 
-export default AddProjectButton;
+export default AddEpicStoryButton;

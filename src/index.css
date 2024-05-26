@@ -22,7 +22,7 @@ button {
   appearance: none;
   background-color: #e78809; /* Colore di sfondo arancione */
   border: none; /* Nessun bordo */
-  border-radius: 0.625em;
+  border-radius: 0.5em;
   box-sizing: border-box;
   color: white; /* Colore del testo bianco */
   cursor: pointer;
@@ -47,13 +47,13 @@ button {
 
 button:disabled {
   pointer-events: none;
-  background-color: #f5a623; /* Colore arancione più chiaro per i bottoni disabilitati */
+  background-color: #ffffff; /* Colore arancione più chiaro per i bottoni disabilitati */
   color: #7a7a7a; /* Colore testo grigio per i bottoni disabilitati */
 }
 
 button:hover {
   color: white; /* Colore del testo bianco anche al passaggio del mouse */
-  background-color: orange; /* Colore di sfondo arancione più scuro al passaggio del mouse */
+  background-color: #e78809; /* Colore di sfondo arancione più scuro al passaggio del mouse */
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
@@ -86,4 +86,111 @@ progress::-moz-progress-bar {
 /* Stili specifici per Internet Explorer e Edge */
 progress::-ms-fill {
   background-color: #333; /* Colore della barra di progressione */
+}
+
+div.backButton{
+  margin-top: 2em;
+  float: right;
+}
+
+.nextBtn{
+  margin-top: 3em;
+  float:right;
+}
+div.container>button{
+   align-items: baseline;
+}
+
+.divPassword{
+  display: flex;
+  align-items: center;
+}
+
+div.divErrore{
+  color: #e78809;
+}
+
+svg{
+  margin-left: 1em;
+}
+
+div.ptcNo{
+  min-width: unset;
+}
+
+div.ptcNo button{
+  padding: 0.8em;
+}
+
+button.ubHnu:hover:not(:disabled), button.ubHnu:focus{
+  background-color: rgba(0, 0, 0, 0);
+  color:rgba(0, 0, 0, .54);
+  box-shadow:rgba(0, 0, 0, 0)  0 0px 0px;
+}
+
+div.row-details{
+  margin-top: 1.3em;
+  margin-bottom: 1em;
+  margin-left: 15%;
+  overflow-wrap: anywhere;
+  display: flex;
+}
+
+div.jDljLp{
+  font-size: unset;
+}
+
+div.block{
+  display: block;
+}
+
+.buttonDividi{
+  margin-left: 15%;
+  margin-top: 1.3em;
+}
+
+div .feedback, div .block button{
+  float: right;
+  display: flex;
+}
+
+div .feedback button, div.block button{
+  height: auto;
+  overflow-wrap: normal;
+}
+
+div .data-table-wrapper {
+  max-width: 100%;
+}
+
+div.Nfhbm{
+  overflow: hidden;
+}
+
+div .BAfJj {
+  display: contents;
+}
+/* Assicurati che le colonne si adattino alla larghezza disponibile */
+div .data-table {
+  width: 100%;
+  table-layout: fixed; /* Optional: Keeps column widths consistent */
+}
+
+div .data-table th, .data-table td {
+  overflow: hidden;
+  text-overflow: ellipsis; /* Optional: Adds ellipsis for overflowing text */
+  white-space: nowrap; /* Optional: Prevents text from wrapping to the next line */
+}
+
+.buttonDividi, .row-details button{
+  font-size: 12px;
+}
+
+p{
+  width: 100%;
+  font-size: 13px;
+}
+
+div button.submit {
+  background-color: #e78809;
 }

@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import Table from './Table';
+import { useState } from "react";
+import Table from "./Table";
 
 const ProjectsPage: React.FC = () => {
-
- 
   return (
-    <div >
-      <Table/>
+    <div>
+      <Table />
     </div>
   );
 };

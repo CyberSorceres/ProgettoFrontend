@@ -2,11 +2,10 @@
 import CommentContainer from './CommentContainer';
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
-import EpicStory from './EpicStory';
 import PopupFeedback from './PopupFeedback';
 import ProjectDetails from './ProjectDetails';
 import DropdownContainer from './DropdownMenuContainer';
@@ -14,6 +13,7 @@ import { useEffect } from 'react';
 
 
 import './UserStory.css'
+import { EpicStory } from 'progettolib';
 interface EpicStoryProp{
   id: number;
   name: string;
@@ -118,7 +118,10 @@ const handleButtonClick = (row: UserStoryProp) => {
 
 const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const data = useLoaderData() as EpicStory;
+    if (!data) return <>Loading...</>
+	console.log(data)
   const [records, setRecords] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -133,15 +136,13 @@ const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
 
   useEffect(() => {
     // Map over the userStoryArray in fakeData and create a new array of objects
-    const newRecords = fakeData.map((item) => {
-      return item.userStoryArray.map((userStory) => {
+    const newRecords = data.userStoriesIds.map((userStory) => {
         return {
-          id: userStory.id,
-          name: userStory.name,
-          desc: userStory.desc,
-          progress: userStory.progress,
+          id: userStory._id,
+          name: userStory.description,
+          desc: userStory.description,
+          progress: userStory.progress || 0.5,
         };
-      });
     });
     const flattenedRecords = newRecords.flat();
 

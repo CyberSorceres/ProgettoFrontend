@@ -5,22 +5,17 @@ import EpicStory from "./EpicStory";
 import UserStory from "./UserStory";
 import BackButton from "./BackButton";
 
-const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
+const Login: React.FC<{ onLogin: (mail: string, password: string) => void }> = ({ onLogin }) => {
   const api = useContext(APIContext);
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError]=useState("");
-  const navigate = useNavigate();
+
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (await api?.login(mail, password)) {
-      onLogin();
-      navigate("/");
-    }else{
-        setError("Utente non Riconosciuto, riprova");
-    }
+      onLogin(mail, password);
   };
 
   return (

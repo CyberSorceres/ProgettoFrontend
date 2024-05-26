@@ -18,9 +18,9 @@ interface EpicStoryProp {
 
 const columns: TableColumn<EpicStoryProp>[] = [
   {
-    name: 'Tag',
-    selector: (row: EpicStoryProp) => row.id,
-    cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    name: 'Id',
+    selector: (row: EpicStoryProp) => row._id,
+    cell: (row: EpicStoryProp) => <span>{row._id}</span>,
     width:'10%',
     sortable: true,
   },

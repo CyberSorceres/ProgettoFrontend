@@ -1,100 +1,42 @@
 
-import CommentContainer from './CommentContainer';
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
-import PopupFeedback from './PopupFeedback';
-import ProjectDetails from './ProjectDetails';
-import DropdownContainer from './DropdownMenuContainer';
-import { useEffect } from 'react';
 import RowDetails from './UserDetails';
-
 import './UserStory.css'
 import { EpicStory } from 'progettolib';
-interface EpicStoryProp{
-  id: number;
-  name: string;
-  desc: string;
-  progress: number;
-  userStoryArray: UserStoryProp[];
-}
+
 interface UserStoryProp{
   id: number;
   name: string;
   desc: string;
   progress: boolean;
-  
 }
-interface EpicStoryProps {
-  epicStory: EpicStoryProp;
-}
-const fakeData = [
-  {
-    id: 1,
-    name: 'ChatGPT vs Bedrock',
-    desc: 'Comparison between ChatGPT and Bedrock',
-    progress: 0,
-    userStoryArray: [
-      {
-        id: 1,
-        name: 'User can compare models',
-        desc: 'Allow users to compare different AI models',
-        progress: true,
-      },
-      {
-        id: 2,
-        name: 'User can view model details',
-        desc: 'Provide detailed information about AI models aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        progress: false,
-      },
-   ],
-  },
 
-  {
-    id: 2,
-    name: 'Project Alpha',
-    desc: 'Description of Project Alpha',
-    progress: 70,
-    userStoryArray: [
-      {
-        id: 3,
-        name: 'User can view project details',
-        desc: 'Provide information about Project Alpha',
-        progress: false,
-      },
-      {
-        id: 4,
-        name: 'User can submit feedback',
-        desc: 'Allow users to provide feedback on Project Alpha',
-        progress: true,
-      },
-    ],
-  },
-];
-const UserStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
+const UserStory: React.FC = () => {
 
 const columns: TableColumn<UserStoryProp>[] = [
   
   {
     name: 'Tag',
     selector: (row: UserStoryProp) => row.id,
-    cell: (row: UserStoryProp) => <span>{row.id}</span>,
+    cell: (row: UserStoryProp) => <span>{row.tag}</span>,
     width:'10%',
     sortable: true,
   },
   {
     name: 'Titolo',
     selector: (row: UserStoryProp) => row.name,
-    cell: (row: UserStoryProp) => <span>{row.name}</span>,
+    cell: (row: UserStoryProp) => <span>{row.description}</span>,
     sortable: true,
   },
 
   {
     name: 'Finita',
-    selector: (row: UserStoryProp) => row.progress,
+    selector: (row: UserStoryProp) => row.progress || 0.5,
     cell: (row: UserStoryProp) => (
       <span>
       {row.progress ? (
@@ -118,8 +60,7 @@ const handleButtonClick = (row: UserStoryProp) => {
     const navigate = useNavigate();
     const data = useLoaderData() as EpicStory;
     if (!data) return <>Loading...</>
-	console.log(data)
-  const [records, setRecords] = useState<any[]>([]);
+	const [records, setRecords] = useState<any[]>(data._userStoriesIds);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -132,30 +73,16 @@ const handleButtonClick = (row: UserStoryProp) => {
     setIsOverlayVisible(false);
   };
 
-  useEffect(() => {
-    // Map over the userStoryArray in fakeData and create a new array of objects
-    const newRecords = data.userStoriesIds.map((userStory) => {
-        return {
-          id: userStory._id,
-          name: userStory.description,
-          desc: userStory.description,
-          progress: userStory.progress || 0.5,
-        };
-    });
-    const flattenedRecords = newRecords.flat();
-
-    setRecords(flattenedRecords);
-  }, [epicStory]);
   
   function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filteredRecords = fakeData.flatMap((item) =>
-      item.userStoryArray.filter((userStory) =>
-        userStory.name.toLowerCase().includes(value)
+    const filteredRecords = 
+      data._userStoriesIds.filter((userStory) =>
+        userStory.description.toLowerCase().includes(value)
       )
-    );
+
     setRecords(filteredRecords);
   };
 

@@ -46,8 +46,10 @@ export const RouterBuilder = (api: API) => {
           <UserStory />{" "}
         </RequireAuth>
       ),
-      loader: ({ params }) => {
-        return api?.getEpicStory(params.epicId, params.id);
+      loader: async ({ params }) => {
+        const res = (await api?.getEpicStory(params.epicId, params.id)) as any;
+        res.projectId = params.id;
+        return res;
       },
     },
     {
@@ -84,5 +86,5 @@ export const RouterBuilder = (api: API) => {
       children: generalRoutes,
     },
   ];
-    return routes
+  return routes;
 };

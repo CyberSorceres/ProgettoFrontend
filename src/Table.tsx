@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
+import { API } from 'progettolib/API'; // Usa l'alias configurato
 import './Table.css';
 
 interface Project {
@@ -18,31 +19,67 @@ const columns: TableColumn<Project>[] = [
   { name: 'ID', selector: (row) => row.id.toString(), sortable: true },
 ];
 
-const projects: Project[] = [
-  { id: 1, title: 'ChatGPT vs Bedrock', client: 'Zero12', startDate: '11/05/2024' },
-  { id: 2, title: 'Project Alpha', client: 'Client X', startDate: '12/12/2023' },
-  // Aggiungi altri progetti qui
-];
-
 const ProjectsTable: React.FC = () => {
-    const navigate = useNavigate();
-    const [records, setRecords] =useState(projects);
-  
-    const handleRowClick = (project: Project) => {
-      navigate(`/project/${project.id}`);
+  const navigate = useNavigate();
+  const [records, setRecords] = useState<Project[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const api = new API(); // Crea un'istanza della classe API
+        console.log('API instance created'); // Debug
+        const loginResult = await api.login('test@gmail.com', 'password'); // Imposta il token (modifica questa parte con la logica di autenticazione)
+        if (!loginResult) {
+          throw new Error('Login failed');
+        }
+        console.log('Login successful'); // Debug
+        const data = await api.getProgettiOfUser();
+        console.log('Projects fetched:', data); // Debug
+        const projects = data.map((project) => ({
+          id: parseInt(project.id),
+          title: project.name,
+          client: 'Unknown', // Puoi modificare questa parte in base ai dati reali
+          startDate: 'Unknown' // Puoi modificare questa parte in base ai dati reali
+        }));
+        setRecords(projects);
+      } catch (err) {
+        console.error('Error fetching projects:', err); // Debug
+        setError('Failed to fetch projects');
+      } finally {
+        setLoading(false);
+      }
     };
 
-    function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
-        const newData = projects.filter(row => {
-          return row.title.toLowerCase().includes(event.target.value.toLowerCase());
-        });
-        setRecords(newData);
-      }
+    fetchProjects();
+  }, []);
+
+  const handleRowClick = (project: Project) => {
+    navigate(`/project/${project.id}`);
+  };
+
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const newData = records.filter(row => {
+      return row.title.toLowerCase().includes(event.target.value.toLowerCase());
+    });
+    setRecords(newData);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className='container mt-5 table'>
-        <AddProjectButton/>
-        <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
+      <AddProjectButton />
+      <div className='textSearch'>
+        <input type="text" placeholder="Search" onChange={handleFilter} />
+      </div>
       <DataTable
         columns={columns}
         data={records}

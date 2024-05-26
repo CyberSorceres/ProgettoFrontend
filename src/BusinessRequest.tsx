@@ -18,14 +18,14 @@ const BusinessRequest: React.FC = () => {
   return (
     <div className='container mt-5 table'>
         <h3>Requisiti di Business</h3>
-        <BackButton/>
         <form onSubmit={handleSubmit}>
           <textarea className="form-control" id="businessRequest" name="businessRequest" placeholder='Inserisci i Requisiti di Business' required ></textarea>
           <div className='divBtn'>
-            <MDBBtn type="submit">Invia Requisiti</MDBBtn>
-            
+            <button className="submit" type="submit">Invia Requisiti</button>
           </div>
         </form>
+        <BackButton/>
+
     </div>
   );
 };

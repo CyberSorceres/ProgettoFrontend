@@ -1,25 +1,37 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { APIContext } from "./App";
-import EpicStory from "./EpicStory";
-import UserStory from "./UserStory";
-import BackButton from "./BackButton";
+import { APIContext, api } from "./App";
+import { Link } from 'react-router-dom';
+import "./Login.css";
+import Password from "./Password";
 
-const Login: React.FC<{ onLogin: (mail: string, password: string) => void }> = ({ onLogin }) => {
-  const api = useContext(APIContext);
+const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError]=useState("");
 
+  const [error, setError] = React.useState<string | null>(null);
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      onLogin(mail, password);
+    if (await api.login(mail, password)) {
+      onLogin();
+      navigate("/");
+    }else{
+        setError("Utente non esistente, riprova");
+    }
+  };
+
+  const handleBlur = () => {
+    setError(null);
   };
 
   return (
-    <div>
+    <>
+    
+    <div className="login">
+    <h3>Login</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="mail" className="form-label">
@@ -35,25 +47,17 @@ const Login: React.FC<{ onLogin: (mail: string, password: string) => void }> = (
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <textarea
-            className="form-control"
-            id="password"
-            value={password}
-            name="password"
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          ></textarea>
-        </div>
-        <div className="divErrore">{error}</div>
-        <button type="submit" className="btn btn-primary">
+        <Password password={password} setPassword={setPassword} label={'Password'} onBlur={handleBlur}/>
+        {error && <div className="divErrore">{error}</div>}
+        <button type="submit" className="btn btn-primary" >
           Accedi
         </button>
       </form>
+      <Link to="/registrazione/step1" className="passwordDimenticata">
+          Password Dimenticata
+        </Link>
     </div>
+    </>
   );
 };
 

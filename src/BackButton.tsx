@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     MDBBtn
   } from 'mdb-react-ui-kit';
-  
+import "./index.css";
 
 
   const BackButton: React.FC = () => {
@@ -12,8 +12,8 @@ import {
         navigate(-1); // Torna alla pagina precedente
       };
     return (
-      <div>
-        <MDBBtn color='primary' onClick={handleGoBack}>Torna Indietro</MDBBtn>
+      <div className="backButton">
+        <button  color='primary' onClick={handleGoBack}>Torna Indietro</button>
       </div>
     );
   };

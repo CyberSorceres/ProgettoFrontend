@@ -8,6 +8,7 @@ import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
 import './EpicStory.css';
 import { Progetto } from 'progettolib';
+import AddEpicStoryButton from './AddEpicStory';
 
 interface EpicStoryProp {
   _id: number;
@@ -17,9 +18,11 @@ interface EpicStoryProp {
 
 const columns: TableColumn<EpicStoryProp>[] = [
   {
-    name: 'Id',
-    selector: (row: EpicStoryProp) => row._id,
-    cell: (row: EpicStoryProp) => <span>{row._id}</span>,
+    name: 'Tag',
+    selector: (row: EpicStoryProp) => row.id,
+    cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    width:'10%',
+    sortable: true,
   },
   {
     name: 'Name',
@@ -59,7 +62,9 @@ const EpicStory: React.FC = () => {
   return (
     <div>
       <div className="EpicStoryDiv">
-        <BackButton />
+        
+        <AddEpicStoryButton></AddEpicStoryButton>
+
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}
@@ -69,7 +74,7 @@ const EpicStory: React.FC = () => {
         onRowClicked={handleRowClick}
         
       />
-
+<BackButton />
       </div>
     </div>
   );

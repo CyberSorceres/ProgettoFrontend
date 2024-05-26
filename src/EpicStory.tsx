@@ -6,6 +6,7 @@ import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
+import DelateEpic from './DelateEpic';
 import './EpicStory.css';
 import AddEpicStoryButton from './AddEpicStory';
 
@@ -55,6 +56,11 @@ const columns: TableColumn<EpicStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
+  {
+    name: '',
+    cell: (row: EpicStoryProp) => <DelateEpic epic={row} />,
+    width:'10%',
+  },
   /*{
     name: 'Actions',
     cell: (row: EpicStoryProp) => <DropdownContainer />,
@@ -67,7 +73,7 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     {
       id: 1,
       name: 'ChatGPT vs Bedrock',
-      desc: 'Comparison between ChatGPT and Bedrock',
+      desc: 'Comparison between ChatGPT and Bedrock nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
       progress: 0,
       userStoryArray: [
         {

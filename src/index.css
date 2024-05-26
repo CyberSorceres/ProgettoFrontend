@@ -194,3 +194,12 @@ p{
 div button.submit {
   background-color: #e78809;
 }
+
+button.trash-btn{
+  background-color: unset;
+  box-shadow: none;
+}
+
+.trash-btn i{
+  color: #333;
+}

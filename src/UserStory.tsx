@@ -9,6 +9,7 @@ import BackButton from './BackButton';
 import EpicStory from './EpicStory';
 import PopupFeedback from './PopupFeedback';
 import ProjectDetails from './ProjectDetails';
+import DelateUser from './DelateUser';
 import DropdownContainer from './DropdownMenuContainer';
 import { useEffect } from 'react';
 import RowDetails from './UserDetails';
@@ -105,6 +106,11 @@ const columns: TableColumn<UserStoryProp>[] = [
     </span>    ),
     width:'15%',
     sortable: true,
+  },
+  {
+    name: '',
+    cell: (row: UserStoryProp) => <DelateUser user={row} />,
+    width:'10%',
   },
 
 ];

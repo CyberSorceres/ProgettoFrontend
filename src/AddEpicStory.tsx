@@ -15,6 +15,8 @@ import "./AddProject.css";
 import DropdownMenuContainer from "./DropdownMenuContainer";
 import { api } from "./App";
 import { useLoaderData } from "react-router-dom";
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 interface EpicStory {
   descrizione: string;
@@ -22,6 +24,7 @@ interface EpicStory {
 
 const AddEpicStoryButton: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [newEpic, setNewEpic] = useState<EpicStory>({ descrizione: "" });
 
   const toggleModal = () => setOpenModal(!openModal);
@@ -37,16 +40,25 @@ const AddEpicStoryButton: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    try{
       const { id: epicId } = await api.addEpicStory(newEpic as any, id);
       const response = await api.bedrock(newEpic.descrizione)
       const { userStories } = JSON.parse(response.content[0].text.replace('```json', '').replace('```', ''))
       for (const user of userStories) {
 	  await api.addUserStrory({tag: (Math.floor(Math.random() * 1000)).toString(), description: user.description}, id, epicId);
       }
+      setLoading(false);
+      setOpenModal(false);
+      // Resetta lo stato del form
+      setNewEpic({ descrizione: "" });
+      window.location.reload();
+    }catch(e){
+      console.error('Errore durante l\'eliminazione:', e);
+      setLoading(false);
     // Chiudi il modal dopo l'invio del form
-    setOpenModal(false);
-    // Resetta lo stato del form
-    setNewEpic({ descrizione: "" });
+
+    }
   };
 
   return (
@@ -79,13 +91,19 @@ const AddEpicStoryButton: React.FC = () => {
                   ></textarea>
                 </div>
               </form>
+              {loading && (
+                <div className="loading-spinner">
+                  <ClipLoader size={50} color={"#123abc"} loading={loading} />
+                  <p>Caricamento in corso...</p>
+                </div>
+              )}
             </MDBModalBody>
             <MDBModalFooter>
               <button
                 onClick={handleSubmit}
                 type="submit"
                 className="btn btn-primary"
-              >
+                >
                 Crea
               </button>
               <button onClick={toggleModal}>Annulla</button>

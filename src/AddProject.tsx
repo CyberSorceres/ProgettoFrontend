@@ -12,9 +12,9 @@ import {
   MDBInput,
 } from 'mdb-react-ui-kit';
 import './AddProject.css';
-import DropdownMenuContainer from './DropdownMenuContainer';
 import { APIContext, api } from './App';
 import { Progetto } from 'progettolib';
+import DropdownMenuContainer from './DropdownMenuContainer';
 
 const AddProjectButton: React.FC = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -34,6 +34,7 @@ const AddProjectButton: React.FC = () => {
     const [chatGPT, setChatGPT] = useState(false)
 
     const getApi = useContext(APIContext)
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 	console.log(newProject)
 	e.preventDefault();
@@ -47,6 +48,7 @@ const AddProjectButton: React.FC = () => {
       setOpenModal(false);
       // Resetta lo stato del form
       setNewProject({ title: '', description: '' });
+      window.location.reload();
     };
 
 

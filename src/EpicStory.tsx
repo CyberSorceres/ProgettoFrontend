@@ -19,6 +19,7 @@ interface EpicStoryProp {
 }
 
 const columns: TableColumn<EpicStoryProp>[] = [
+<<<<<<< Updated upstream
   {
     name: 'Id',
     selector: (row: EpicStoryProp) => row._id,
@@ -26,6 +27,9 @@ const columns: TableColumn<EpicStoryProp>[] = [
     width:'10%',
     sortable: true,
   },
+=======
+  
+>>>>>>> Stashed changes
   {
     name: 'Name',
     selector: (row: EpicStoryProp) => row.description,

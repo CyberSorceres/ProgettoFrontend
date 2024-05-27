@@ -203,3 +203,9 @@ button.trash-btn{
 .trash-btn i{
   color: #333;
 }
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

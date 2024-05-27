@@ -93,27 +93,18 @@ const handleButtonClick = (row: UserStoryProp) => {
   };
 
   const handleRowClick = (row:UserStoryProp) => {
-    setSelectedRowId(row.id === selectedRowId ? null : row.id);
+    setSelectedRowId(row.tag === selectedRowId ? null : row.tag);
   };
 
   const handleRowExpandToggled = (expanded: boolean, row: UserStoryProp) => {
-    setSelectedRowId(expanded ? row.id : null);
+    setSelectedRowId(expanded ? row.tag : null);
   };
 
-  const customExpanderIcon = (row: UserStoryProp) => (
-    <div onClick={() => handleRowClick(row)}>
-      {selectedRowId === row.id ? (
-        <i className="fas fa-chevron-up" />
-      ) : (
-        <i className="fas fa-chevron-down" />
-      )}
-    </div>
-  );
 
   return (
    
     <div>
-      
+      <h3 className='pageTitle'>{data.descrizione}</h3>
       <div className={`UserStoryDiv ${isOverlayVisible ? 'overlay-active' : ''}`}>
       {isOverlayVisible && <div className="overlay" onClick={handleToggleMenuClose}></div>}
       
@@ -127,10 +118,10 @@ const handleButtonClick = (row: UserStoryProp) => {
         expandOnRowClicked
         highlightOnHover
         expandableRows
+        expandableRowExpanded={(row) => row.tag === selectedRowId}
         onRowClicked={handleRowClick}
         onRowExpandToggled={handleRowExpandToggled}
-        expandableRowExpanded={(row) => row.id === selectedRowId}
-       expandableRowsComponent={({ data }) => <RowDetails data={data} />}
+        expandableRowsComponent={({ data }) => <RowDetails data={data} />}
        />
        </div>
       <BackButton />

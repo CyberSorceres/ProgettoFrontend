@@ -203,3 +203,25 @@ button.trash-btn{
 .trash-btn i{
   color: #333;
 }
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h3.pageTitle {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.logout{
+  background-color: unset;
+  padding: 0.1em;
+}
+
+.logout:hover{
+  background-color: unset;
+  box-shadow: unset;
+}

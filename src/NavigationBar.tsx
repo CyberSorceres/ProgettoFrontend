@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './NavigationBar.css';
+import Logout from './Logout';
 
 const routeTitles: Record<string, string> = {
     '/': 'Progetti',
@@ -20,6 +21,7 @@ const NavigationBar: React.FC = () => {
       <div className="right">
         <Link to="/" className="button">Progetti</Link>
         <Link to="/notifiche" className="button">Notifiche</Link>
+        <a><Logout ></Logout></a>
       </div>
     </nav>
   );

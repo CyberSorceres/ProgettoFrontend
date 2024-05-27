@@ -9,7 +9,6 @@ const columns: TableColumn<Project>[] = [
   { name: 'Titolo', selector: (row) => row.name, sortable: true },
   { name: 'Cliente', selector: (row) => row.name, sortable: true },
   { name: 'Data di Inizio', selector: (row) => row.name, sortable: true },
-  { name: 'ID', selector: (row) => row.id.toString(), sortable: true },
 ];
 
 const ProjectsTable: React.FC = () => {

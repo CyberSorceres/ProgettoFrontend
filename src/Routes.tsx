@@ -74,6 +74,14 @@ export const RouterBuilder = (api: API) => {
         />
       ),
     },
+      {
+	path: 'acceptInvite/:inviteId',
+	element: (
+	    <Registrazione />
+	),
+	loader: ({params}) => {return params.inviteId}
+	
+    }
   ];
   const routes = [
     {

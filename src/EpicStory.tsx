@@ -9,6 +9,7 @@ import DropdownContainer from './DropdownMenuContainer';
 import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
+import InviteUserButton from './InviteUserButton'
 
 interface EpicStoryProp {
   _id: number;
@@ -63,7 +64,8 @@ const EpicStory: React.FC = () => {
     <div>
       <div className="EpicStoryDiv">
         
-        <AddEpicStoryButton></AddEpicStoryButton>
+          <AddEpicStoryButton></AddEpicStoryButton>
+	  <InviteUserButton> </InviteUserButton>
 
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable

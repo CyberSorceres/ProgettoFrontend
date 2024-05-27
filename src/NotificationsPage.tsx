@@ -57,7 +57,7 @@ const NotificationDetailComponent: React.FC<{ notification: Notification; onClos
     <div className="notification-detail">
       <h2>{notification.title}</h2>
       <p>{notification.description}</p>
-      <button onClick={onClose}>Chiudi</button>
+      
     </div>
   );
 };

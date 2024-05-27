@@ -17,12 +17,12 @@ import { api } from "./App";
 import { useLoaderData } from "react-router-dom";
 
 interface EpicStory {
-  description: string;
+  descrizione: string;
 }
 
 const AddEpicStoryButton: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [newEpic, setNewEpic] = useState<EpicStory>({ description: "" });
+  const [newEpic, setNewEpic] = useState<EpicStory>({ descrizione: "" });
 
   const toggleModal = () => setOpenModal(!openModal);
 

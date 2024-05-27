@@ -6,6 +6,7 @@ import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
+import DelateEpic from './DelateEpic';
 import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
@@ -37,6 +38,11 @@ const columns: TableColumn<EpicStoryProp>[] = [
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
   },
+  {
+    name: '',
+    cell: (row: EpicStoryProp) => <DelateEpic epic={row} />,
+    width:'10%',
+  },
   /*{
     name: 'Actions',
     cell: (row: EpicStoryProp) => <DropdownContainer />,
@@ -47,11 +53,10 @@ const EpicStory: React.FC = () => {
     const project = useLoaderData() as Progetto;
     const navigate = useNavigate();
     const [records, setRecords] = useState<EpicStoryProp[]>(project.epicStoriesIds as any);
-    console.log(project.epicStoriesIds)
 
     const handleRowClick = (data: {_id: string}) => {
-    navigate(`epic/${data._id}`);
-  };
+	navigate(`epic/${data._id}`);
+    };
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
       const newData = (project.epicStoriesIds as any[]).filter((row) => {

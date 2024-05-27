@@ -5,6 +5,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
+import DelateUser from './DelateUser';
 import RowDetails from './UserDetails';
 import './UserStory.css'
 import { EpicStory } from 'progettolib';
@@ -35,8 +36,8 @@ const columns: TableColumn<UserStoryProp>[] = [
   },
 
   {
-    name: 'Finita',
-    selector: (row: UserStoryProp) => row.progress || 0.5,
+    name: 'Completata',
+    selector: (row: UserStoryProp) => row.progress ?? 0.5,
     cell: (row: UserStoryProp) => (
       <span>
       {row.progress ? (
@@ -47,6 +48,11 @@ const columns: TableColumn<UserStoryProp>[] = [
     </span>    ),
     width:'15%',
     sortable: true,
+  },
+  {
+    name: '',
+    cell: (row: UserStoryProp) => <DelateUser user={row} />,
+    width:'10%',
   },
 
 ];

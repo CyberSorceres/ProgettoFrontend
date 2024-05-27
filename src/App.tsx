@@ -8,7 +8,7 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-import { API } from "progettolib";
+import { API, API_interface } from "progettolib";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -19,13 +19,19 @@ import BusinessRequest from "./BusinessRequest";
 import { RouterBuilder } from "./Routes";
 export const APIContext = createContext<API | null>(null);
 
-export const api = new API();
+export let api = createAPI();
+function createAPI() {
+    const api = new API() as (API_interface & {token: string});
+    if(localStorage.getItem('token'))
+	api.token = localStorage.getItem('token')
+    return api
+}
 
 const App: React.FC = () => {
   const router = createBrowserRouter(RouterBuilder(api));
   return (
     <APIContext.Provider value={api}>
-      <RouterProvider router={router} />
+	  <RouterProvider router={router} />
     </APIContext.Provider>
   );
 };

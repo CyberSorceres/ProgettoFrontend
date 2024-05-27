@@ -16,7 +16,8 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (await api.login(mail, password)) {
-      onLogin();
+	onLogin();
+	localStorage.setItem('token', api.token);
       navigate("/");
     }else{
         setError("Utente non esistente, riprova");

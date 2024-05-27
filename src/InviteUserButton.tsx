@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   MDBBtn,
   MDBModal,
@@ -17,12 +17,12 @@ import { api } from "./App";
 import { useLoaderData } from "react-router-dom";
 
 interface EpicStory {
-  descrizione: string;
+  description: string;
 }
 
-const AddEpicStoryButton: React.FC = () => {
+const InviteUserButton: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [newEpic, setNewEpic] = useState<EpicStory>({ descrizione: "" });
+  const [newEpic, setNewEpic] = useState<EpicStory>({ description: "" });
 
   const toggleModal = () => setOpenModal(!openModal);
 
@@ -33,52 +33,39 @@ const AddEpicStoryButton: React.FC = () => {
       [name]: value,
     }));
   };
-  const { id } = useLoaderData() as { id: string };
+    const { id } = useLoaderData() as { id: string };
+    const option = useRef(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-      const { id: epicId } = await api.addEpicStory(newEpic as any, id);
-      const response = await api.bedrock(newEpic.descrizione)
-      const { userStories } = JSON.parse(response.content[0].text.replace('```json', '').replace('```', ''))
-      for (const user of userStories) {
-	  await api.addUserStrory({tag: (Math.floor(Math.random() * 1000)).toString(), description: user.description}, id, epicId);
-      }
-    // Chiudi il modal dopo l'invio del form
+      console.log(option.current.value)
+      const invite = await api.invite(id, option.current.value === 'user' ? 3 : 1)
+      const url = `${window.location.origin}/acceptInvite/${invite}`
+      alert(url)
     setOpenModal(false);
-    // Resetta lo stato del form
-    setNewEpic({ descrizione: "" });
   };
 
   return (
     <>
-      <MDBBtn onClick={toggleModal}>Crea Nuova Epic Story</MDBBtn>
+      <MDBBtn onClick={toggleModal}>Invita</MDBBtn>
 
       <MDBModal tabIndex="-1" modal open={openModal} centered>
         <MDBModalDialog>
           <MDBModalContent className="dialogContent">
             <MDBModalHeader>
-              <MDBModalTitle>Crea nuova Epic Story</MDBModalTitle>
+              <MDBModalTitle>Invita utente</MDBModalTitle>
               <button
                 type="button"
                 className="btn-close"
                 onClick={toggleModal}
               ></button>
             </MDBModalHeader>
-            <MDBModalBody>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="description" className="form-label">
-                    Descrizione
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    name="descrizione"
-                    onChange={handleChange}
-                    required
-                  ></textarea>
-                </div>
-              </form>
+          <MDBModalBody>
+	  <label htmlFor="role">Ruolo</label>
+						  {' '}
+          <select ref={option} id="role">
+	    <option value="user">Cliente</option>
+	  <option value="dev">Sviluppatore</option>
+	  </select>
             </MDBModalBody>
             <MDBModalFooter>
               <button
@@ -97,4 +84,4 @@ const AddEpicStoryButton: React.FC = () => {
   );
 };
 
-export default AddEpicStoryButton;
+export default InviteUserButton;

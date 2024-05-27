@@ -1,21 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { APIContext } from "./App";
+import { APIContext, api } from "./App";
 import { Link } from 'react-router-dom';
 import "./Login.css";
 import Password from "./Password";
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
-  const api = useContext(APIContext);
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+
   const [error, setError] = React.useState<string | null>(null);
   const navigate = useNavigate();
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (await api?.login(mail, password)) {
+    if (await api.login(mail, password)) {
       onLogin();
       navigate("/");
     }else{

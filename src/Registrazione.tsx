@@ -1,50 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, useLoaderData } from 'react-router-dom';
 import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import "./Registrazione.css"
 import BackButton from './BackButton';
+import { api } from './App';
 
 const steps = ['Step 1', 'Step 2'];
 
 const RegistrationStepper: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [formData, setFormData] = useState({
-    step1Data: { email: '' },
-    step2Data:{ oldPassword: '' ,password: '', confirmPassword: '' },
+     email: '' ,
+     password: '', confirmPassword: '' ,
   });
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const inviteId = useLoaderData()
 
   const location = useLocation();
   const [isStep1Valid, setIsStep1Valid] = useState(false);
 
   useEffect(() => {
-    if (isFirstLoad) {
-      navigate('/registrazione/step1');
-      setActiveStep(0);
-      setIsFirstLoad(false);
-    } else {
-      if (location.pathname === '/registrazione/step1') setActiveStep(0);
-      else if (location.pathname === '/registrazione/step2') setActiveStep(1);
-    }
-  }, [location, navigate, isFirstLoad]);
-
-  useEffect(() => {
     // Validate Step 1 data
-    if (formData.step1Data.email.trim() !== '') {
+    if (formData.email.trim() !== '') {
       setIsStep1Valid(true);
     } else {
       setIsStep1Valid(false);
     }
-  }, [formData.step1Data]);
+  }, [formData]);
 
   const handleNext = () => {
     
     if (activeStep < steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      navigate(`/registrazione/step${activeStep + 2}`);
     } else {
       //handleSubmit();
     }
@@ -59,16 +48,18 @@ const RegistrationStepper: React.FC = () => {
     }
   };*/
 
-  const updateFormData = (step: string, data: any) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [step]: data,
+    const updateFormData = (data: any) => {
+    setFormData(() => ({
+      ...formData,
+	...data,
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('Form Data:', formData);
-    // Qui puoi fare qualsiasi cosa con i dati del modulo, come inviarli a un server
+      await api.register(formData.email, formData.password)
+      await api.login(formData.email, formData.password)
+      await api.acceptInvite(inviteId)
   };
 
   return (
@@ -84,11 +75,7 @@ const RegistrationStepper: React.FC = () => {
           </Step>
         ))}
       </Stepper>
-      <Routes>
-        <Route path="step1" element={<Step1 data={formData.step1Data} updateData={(data: any) => updateFormData('step1Data', data)}
-              onSubmit={handleNext} />} />
-        <Route path="step2" element={<Step2 data={formData.step2Data} updateData={(data: any) => updateFormData('step2Data', data)} onSubmit={handleNext}/>} />
-      </Routes>
+			  {activeStep === 0 ? <Step1 data={formData} updateData={updateFormData} onSubmit={handleNext} /> : <Step2 data={formData} updateData={updateFormData} onSubmit={handleSubmit}/> }
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       </Box>
     </Box>

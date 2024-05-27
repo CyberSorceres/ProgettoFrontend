@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
 import UserStory from './UserStory';
@@ -8,50 +8,32 @@ import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
 import DelateEpic from './DelateEpic';
 import './EpicStory.css';
+import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
+import InviteUserButton from './InviteUserButton'
 
 interface EpicStoryProp {
-  id: number;
-  name: string;
-  desc: string;
+  _id: number;
+  description: string;
   progress: number;
-  userStoryArray: UserStoryProp[];
-}
-
-interface UserStoryProp {
-  id: number;
-  name: string;
-  desc: string;
-  progress: number;
-}
-
-interface EpicStoryProps {
-  epicStory: EpicStoryProp;
 }
 
 const columns: TableColumn<EpicStoryProp>[] = [
   {
-    name: 'Tag',
-    selector: (row: EpicStoryProp) => row.id,
-    cell: (row: EpicStoryProp) => <span>{row.id}</span>,
+    name: 'Id',
+    selector: (row: EpicStoryProp) => row._id,
+    cell: (row: EpicStoryProp) => <span>{row._id}</span>,
     width:'10%',
     sortable: true,
   },
   {
     name: 'Name',
-    selector: (row: EpicStoryProp) => row.name,
-    cell: (row: EpicStoryProp) => <span>{row.name}</span>,
-    sortable: true,
-
-  },
-  {
-    name: 'Description',
-    selector: (row: EpicStoryProp) => row.desc,
-    cell: (row: EpicStoryProp) => <span>{row.desc}</span>,
+    selector: (row: EpicStoryProp) => row.description,
+    cell: (row: EpicStoryProp) => <span>{row.description}</span>,
   },
   {
     name: 'Progress',
-    selector: (row: EpicStoryProp) => row.progress,
+    selector: (row: EpicStoryProp) => row.progress || 0.5,
     cell: (row: EpicStoryProp) => (
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
@@ -67,60 +49,17 @@ const columns: TableColumn<EpicStoryProp>[] = [
   },*/
 ];
 
-const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
-  const { id } = useParams<{ id: string }>();
-  const fakeData: EpicStoryProp[] = [
-    {
-      id: 1,
-      name: 'ChatGPT vs Bedrock',
-      desc: 'Comparison between ChatGPT and Bedrock nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
-      progress: 0,
-      userStoryArray: [
-        {
-          id: 1,
-          name: 'User can compare models',
-          desc: 'Allow users to compare different AI models',
-          progress: 90,
-        },
-        {
-          id: 2,
-          name: 'User can view model details',
-          desc: 'Provide detailed information about AI models',
-          progress: 80,
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Project Alpha',
-      desc: 'Description of Project Alpha',
-      progress: 70,
-      userStoryArray: [
-        {
-          id: 1,
-          name: 'User can view project details',
-          desc: 'Provide information about Project Alpha',
-          progress: 60,
-        },
-        {
-          id: 2,
-          name: 'User can submit feedback',
-          desc: 'Allow users to provide feedback on Project Alpha',
-          progress: 30,
-        },
-      ],
-    },
-  ];
+const EpicStory: React.FC = () => {
+    const project = useLoaderData() as Progetto;
+    const navigate = useNavigate();
+    const [records, setRecords] = useState<EpicStoryProp[]>(project.epicStoriesIds as any);
 
-  const navigate = useNavigate();
-  const [records, setRecords] = useState<EpicStoryProp[]>(fakeData);
-
-  const handleRowClick = (fakeData: UserStoryProp) => {
-    navigate(`userstory/${fakeData.id}`);
-  };
+    const handleRowClick = (data: {_id: string}) => {
+	navigate(`epic/${data._id}`);
+    };
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const newData = fakeData.filter((row) => {
+      const newData = (project.epicStoriesIds as any[]).filter((row) => {
       return row.name.toLowerCase().includes(event.target.value.toLowerCase());
     });
     setRecords(newData);
@@ -130,7 +69,8 @@ const EpicStory: React.FC<EpicStoryProps> = ({ epicStory }) => {
     <div>
       <div className="EpicStoryDiv">
         
-        <AddEpicStoryButton></AddEpicStoryButton>
+          <AddEpicStoryButton></AddEpicStoryButton>
+	  <InviteUserButton> </InviteUserButton>
 
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable

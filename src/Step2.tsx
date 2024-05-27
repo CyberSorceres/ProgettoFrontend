@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Password from './Password';
 
 interface Step2Props {
-    data: { oldPassword: string, password:string, confirmPassword:string};
-    updateData: (data: { oldPassword?: string; password?: string; confirmPassword?: string }) => void;
+    data: { password:string, confirmPassword:string};
+    updateData: (data: { password?: string; confirmPassword?: string }) => void;
     onSubmit: () => void;  // Add onSubmit prop
   }
 
@@ -39,7 +39,6 @@ const Step2: React.FC<Step2Props> = ({ data, updateData, onSubmit }) => {
     return (
       <div>
         <form onSubmit={handleSubmit}>
-            <Password password={data.oldPassword} setPassword={(value) => updateData({ oldPassword: value })} label={'Password Provvisoria'} onBlur={handleBlur}/>
             <Password password={data.password} setPassword={(value) => updateData({ password: value })} label={'Password'} onBlur={handleBlur}/>
             <Password password={data.confirmPassword} setPassword={(value) => updateData({ confirmPassword: value })} label={'Conferma Password'} onBlur={handleBlur}/>
             {error && <div className="divErrore">{error}</div>}

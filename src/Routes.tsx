@@ -12,7 +12,7 @@ import Login from "./Login";
 import { Outlet } from "react-router-dom";
 
 export const RouterBuilder = (api: API) => {
-  const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(api.loggedIn());
   const generalRoutes = [
     {
       path: "/",

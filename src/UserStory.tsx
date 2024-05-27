@@ -94,7 +94,7 @@ const columns: TableColumn<UserStoryProp>[] = [
   },
 
   {
-    name: 'Finita',
+    name: 'Completata',
     selector: (row: UserStoryProp) => row.progress,
     cell: (row: UserStoryProp) => (
       <span>

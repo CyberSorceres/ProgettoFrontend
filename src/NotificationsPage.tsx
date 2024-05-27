@@ -23,20 +23,23 @@ interface Notification {
   title: string;
   summary: string;
   description: string;
+  read: boolean;
 }
 
 // Componente Presentazionale per la notifica
 const NotificationComponent: React.FC<{ notification: Notification; onClick: () => void }> = ({ notification, onClick }) => {
   return (
-    <div className="notification" onClick={onClick}>
-      <h3>{notification.title}</h3>
+    <div className= {`notification ${notification.read ? '' : 'unread'}`} onClick={onClick}>
+      <h3 className={notification.read ? '' : 'bold'}>{notification.title}</h3>
       <p>{notification.summary}</p>
+      {notification.read && <span className="unread-dot"></span>}
     </div>
   );
 };
 
 // Componente Presentazionale per la lista di notifiche
 const NotificationListComponent: React.FC<{ notifications: Notification[]; onNotificationClick: (index: number) => void }> = ({ notifications, onNotificationClick }) => {
+  const sortNotifications = [...notifications].sort((a, b) => a.read === b.read ? 0 : a.read ? 1 : -1);
   return (
     <div className="notification-list">
       <h2>Notifiche</h2>
@@ -64,15 +67,20 @@ const NotificationDetailComponent: React.FC<{ notification: Notification; onClos
 
 // Componente Container per gestire lo stato e la logica
 const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ notifications }) => {
+  const [notificationsState, setNotificationsState] = useState(notifications);
   const [selectedNotificationIndex, setSelectedNotificationIndex] = useState<number | null>(null);
 
-  const handleNotificationClick = (index: number) => {
-    setSelectedNotificationIndex(index);
+  const handleNotificationClick = async (index: number) => {
+    const updatedNotifications = [...notificationsState];
+    if(!updatedNotifications[index].read) {
+      await fetch(''), {   //ci andrebbe il path della lambda?
+        method: 'POST',
+        body :JSON.stringify({notificationID: updatedNotifications[index].title}),
   };
 
-  const handleCloseNotification = () => {
-    setSelectedNotificationIndex(null);
-  };
+  updatedNotifications[index].read = true;
+  setNotificationsState(updatedNotifications);
+    }}
 
   return (
     <div className="notification-page">
@@ -82,23 +90,15 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
           onNotificationClick={handleNotificationClick}
         />
       </div>
-      <div className="notification-column">
-        {selectedNotificationIndex !== null && (
-          <NotificationDetailComponent
-            notification={notifications[selectedNotificationIndex]}
-            onClose={handleCloseNotification}
-          />
-        )}
-      </div>
     </div>
   );
 };
 
 // Dati di esempio per le notifiche
 const notificationsData: Notification[] = [
-  { title: 'Notifica 1', summary: 'Sommario della notifica 1', description: 'Descrizione dettagliata della notifica 1' },
-  { title: 'Notifica 2', summary: 'Sommario della notifica 2', description: 'Descrizione dettagliata della notifica 2' },
-  { title: 'Notifica 3', summary: 'Sommario della notifica 3', description: 'Descrizione dettagliata della notifica 3' },
+  { title: 'Notifica 1', summary: 'Sommario della notifica 1', description: 'Descrizione dettagliata della notifica 1', read: true },
+  { title: 'Notifica 2', summary: 'Sommario della notifica 2', description: 'Descrizione dettagliata della notifica 2', read: true },
+  { title: 'Notifica 3', summary: 'Sommario della notifica 3', description: 'Descrizione dettagliata della notifica 3', read: false },
 ];
 
 // Componente principale
@@ -107,3 +107,5 @@ const NotificationPage: React.FC = () => {
 };
 
 export default NotificationPage;
+
+

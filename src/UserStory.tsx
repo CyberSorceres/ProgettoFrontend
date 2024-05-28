@@ -5,7 +5,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
-import DelateUser from './DelateUser';
+import DeleteUser from './DeleteUser';
 import RowDetails from './UserDetails';
 import './UserStory.css'
 import { EpicStory } from 'progettolib';
@@ -51,7 +51,7 @@ const columns: TableColumn<UserStoryProp>[] = [
   },
   {
     name: '',
-    cell: (row: UserStoryProp) => <DelateUser user={row} />,
+    cell: (row: UserStoryProp) => <DeleteUser user={row} />,
     width:'10%',
   },
 

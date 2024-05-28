@@ -21,11 +21,11 @@ import {
     desc: string;
     progress: number;
   }
-  interface DelateEpicProps {
+  interface DeleteEpicProps {
     epic: EpicStoryProp;
 }
 
-const DelateEpic: React.FC<DelateEpicProps> = ({ epic }) => {
+const DeleteEpic: React.FC<DeleteEpicProps> = ({ epic }) => {
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -63,4 +63,4 @@ const DelateEpic: React.FC<DelateEpicProps> = ({ epic }) => {
     );
 }
 
-export default DelateEpic;
+export default DeleteEpic;

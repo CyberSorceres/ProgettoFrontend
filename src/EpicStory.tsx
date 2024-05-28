@@ -6,7 +6,7 @@ import BackButton from './BackButton';
 import UserStory from './UserStory';
 import PopupFeedback from './PopupFeedback';
 import DropdownContainer from './DropdownMenuContainer';
-import DelateEpic from './DelateEpic';
+import DeleteEpic from './DeleteEpic';
 import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
@@ -40,7 +40,7 @@ const columns: TableColumn<EpicStoryProp>[] = [
   },
   {
     name: '',
-    cell: (row: EpicStoryProp) => <DelateEpic epic={row} />,
+    cell: (row: EpicStoryProp) => <DeleteEpic epic={row} />,
     width:'10%',
   },
   /*{

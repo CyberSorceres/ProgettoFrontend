@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const RejectProject: React.FC = () => {
 
     const handleClick=()=>{
-        //delate business requirement
+        //Delete business requirement
         //send notification to sender, reject project
     }
 

@@ -14,11 +14,11 @@ import {
     desc: string;
     progress: number;
   }
-  interface DelateUserProps {
+  interface DeleteUserProps {
     user: UserStoryProp;
 }
 
-const DelateUser: React.FC<DelateUserProps> = ({ user }) => {
+const DeleteUser: React.FC<DeleteUserProps> = ({ user }) => {
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -55,4 +55,4 @@ const DelateUser: React.FC<DelateUserProps> = ({ user }) => {
     );
 }
 
-export default DelateUser;
+export default DeleteUser;

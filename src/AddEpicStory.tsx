@@ -15,6 +15,8 @@ import "./AddProject.css";
 import DropdownMenuContainer from "./DropdownMenuContainer";
 import { api } from "./App";
 import { useLoaderData } from "react-router-dom";
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 interface EpicStory {
   descrizione: string;
@@ -23,6 +25,7 @@ interface EpicStory {
 const AddEpicStoryButton: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
   const [newEpic, setNewEpic] = useState<EpicStory>({ descrizione: "" });
+  const [loading, setLoading] = useState(false);
 
   const toggleModal = () => setOpenModal(!openModal);
 
@@ -33,20 +36,29 @@ const AddEpicStoryButton: React.FC = () => {
       [name]: value,
     }));
   };
+
   const { id } = useLoaderData() as { id: string };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    try {
       const { id: epicId } = await api.addEpicStory(newEpic as any, id);
-      const response = await api.bedrock(newEpic.descrizione)
-      const { userStories } = JSON.parse(response.content[0].text.replace('```json', '').replace('```', ''))
+      const response = await api.bedrock(newEpic.descrizione);
+      const { userStories } = JSON.parse(response.content[0].text.replace('```json', '').replace('```', ''));
       for (const user of userStories) {
-	  await api.addUserStrory({tag: (Math.floor(Math.random() * 1000)).toString(), description: user.description}, id, epicId);
+        await api.addUserStrory({ tag: (Math.floor(Math.random() * 1000)).toString(), description: user.description }, id, epicId);
       }
-    // Chiudi il modal dopo l'invio del form
-    setOpenModal(false);
-    // Resetta lo stato del form
-    setNewEpic({ descrizione: "" });
+      // Chiudi il modal e resetta lo stato del form
+      setLoading(false);
+      setOpenModal(false);
+      setNewEpic({ descrizione: "" });
+      // Ricarica la pagina
+      window.location.reload();
+    } catch (e) {
+      console.error('Errore durante l\'eliminazione:', e);
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,6 +93,12 @@ const AddEpicStoryButton: React.FC = () => {
               </form>
             </MDBModalBody>
             <MDBModalFooter>
+            {loading && (
+                <div className="loading-spinner">
+                  <ClipLoader size={50} color={"#123abc"} loading={loading} />
+                  <p>Caricamento in corso...</p>
+                </div>
+              )}
               <button
                 onClick={handleSubmit}
                 type="submit"

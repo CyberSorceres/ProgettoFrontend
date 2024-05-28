@@ -19,13 +19,7 @@ interface EpicStoryProp {
 }
 
 const columns: TableColumn<EpicStoryProp>[] = [
-  {
-    name: 'Id',
-    selector: (row: EpicStoryProp) => row._id,
-    cell: (row: EpicStoryProp) => <span>{row._id}</span>,
-    width:'10%',
-    sortable: true,
-  },
+
   {
     name: 'Name',
     selector: (row: EpicStoryProp) => row.description,
@@ -67,6 +61,7 @@ const EpicStory: React.FC = () => {
 
   return (
     <div>
+      <h3 className='pageTitle'>{project.name}</h3>
       <div className="EpicStoryDiv">
         
           <AddEpicStoryButton></AddEpicStoryButton>

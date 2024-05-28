@@ -22,7 +22,7 @@ const NotificationComponent: React.FC<{ notification: Notification; onClick: () 
 };
 
 // Componente Presentazionale per la lista di notifiche
-const NotificationListComponent: React.FC<{ notifications: Notification[]; onNotificationClick: (index: number) => void }> = ({ notifications, onNotificationClick }) => {
+const NotificationListComponent: React.FC<{ notifications: Notification[]; onNotificationClick: (id: string) => void }> = ({ notifications, onNotificationClick }) => {
   const sortedNotifications = [...notifications].sort((a, b) => a.read === b.read ? 0 : a.read ? 1 : -1);
   return (
     <div className="notification-list">
@@ -31,7 +31,7 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
         <NotificationComponent
           key={index}
           notification={notification}
-          onClick={() => onNotificationClick(index)}
+          onClick={() => onNotificationClick(notification.id)}
         />
       ))}
     </div>
@@ -55,7 +55,7 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
 
   const handleNotificationClick = (id: string) => {
     const updatedNotifications = [...notificationsState];
-    const index = updatedNotifications.findIndex(notification => notification.id === id) as Number;
+    const index = updatedNotifications.findIndex(notification => notification.id === id);
 
     if (index !== -1 && !updatedNotifications[index].read) {
       updatedNotifications[index].read = true;
@@ -64,9 +64,7 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
     setSelectedNotificationId(id);
   };
 
-  const handleCloseDetail = () => {
-    setSelectedNotificationId(null);
-  };
+
 
   return (
     <div className="notification-page">

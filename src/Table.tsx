@@ -5,10 +5,18 @@ import AddProjectButton from './AddProject';
 import './Table.css';
 import { Progetto as Project } from 'progettolib';
 
+
 const columns: TableColumn<Project>[] = [
   { name: 'Titolo', selector: (row) => row.name, sortable: true },
   { name: 'Cliente', selector: (row) => row.name, sortable: true },
   { name: 'Data di Inizio', selector: (row) => row.name, sortable: true },
+  {
+    name: 'Progress',
+    selector: (row) => row.progress || 0.5,
+    cell: (row) => (
+      <progress className="progress-epic-story" value={row.progress} max="100" />
+    ),
+  },
 ];
 
 const ProjectsTable: React.FC = () => {
@@ -25,7 +33,7 @@ const ProjectsTable: React.FC = () => {
 
     function handleFilter(event: React.ChangeEvent<HTMLInputElement>): void {
         const newData = projects.filter(row => {
-          return row.title.toLowerCase().includes(event.target.value.toLowerCase());
+          return row.name.toLowerCase().includes(event.target.value.toLowerCase());
         });
         setRecords(newData);
       }

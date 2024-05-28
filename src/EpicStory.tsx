@@ -21,7 +21,7 @@ interface EpicStoryProp {
 const columns: TableColumn<EpicStoryProp>[] = [
 
   {
-    name: 'Name',
+    name: 'Despription',
     selector: (row: EpicStoryProp) => row.description,
     cell: (row: EpicStoryProp) => <span>{row.description}</span>,
   },
@@ -31,12 +31,8 @@ const columns: TableColumn<EpicStoryProp>[] = [
     cell: (row: EpicStoryProp) => (
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
-  },
-  {
-    name: '',
-    cell: (row: EpicStoryProp) => <DelateEpic epic={row} />,
-    width:'10%',
-  },
+    width:'15%',
+    },
   /*{
     name: 'Actions',
     cell: (row: EpicStoryProp) => <DropdownContainer />,
@@ -49,12 +45,12 @@ const EpicStory: React.FC = () => {
     const [records, setRecords] = useState<EpicStoryProp[]>(project.epicStoriesIds as any);
 
     const handleRowClick = (data: {_id: string}) => {
-	navigate(`epic/${data._id}`);
+	    navigate(`epic/${data._id}`);
     };
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
       const newData = (project.epicStoriesIds as any[]).filter((row) => {
-      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
+      return row.description.toLowerCase().includes(event.target.value.toLowerCase());
     });
     setRecords(newData);
   };

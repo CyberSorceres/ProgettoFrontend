@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
 import UserStory from './UserStory';
@@ -11,6 +11,8 @@ import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
 import InviteUserButton from './InviteUserButton'
+import ClipLoader from 'react-spinners/ClipLoader';
+import { useLoading } from './LoadingContext';
 
 interface EpicStoryProp {
   _id: number;
@@ -31,7 +33,7 @@ const columns: TableColumn<EpicStoryProp>[] = [
     cell: (row: EpicStoryProp) => (
       <progress className="progress-epic-story" value={row.progress} max="100" />
     ),
-    width:'15%',
+    width:'25%',
     },
   /*{
     name: 'Actions',
@@ -42,7 +44,17 @@ const columns: TableColumn<EpicStoryProp>[] = [
 const EpicStory: React.FC = () => {
     const project = useLoaderData() as Progetto;
     const navigate = useNavigate();
+    const navigation = useNavigation();
     const [records, setRecords] = useState<EpicStoryProp[]>(project.epicStoriesIds as any);
+    const { isLoading, setLoading } = useLoading();
+
+    useEffect(() => {
+      if (navigation.state === 'loading') {
+        setLoading(true);
+      } else {
+        setLoading(false);
+      }
+    }, [navigation.state, setLoading]);
 
     const handleRowClick = (data: {_id: string}) => {
 	    navigate(`epic/${data._id}`);
@@ -62,7 +74,12 @@ const EpicStory: React.FC = () => {
         
           <AddEpicStoryButton></AddEpicStoryButton>
 	  <InviteUserButton> </InviteUserButton>
-
+    {isLoading && (
+        <div className="loading-spinner">
+          <ClipLoader size={50} color={"#123abc"} loading={isLoading} />
+          <p>Caricamento in corso...</p>
+        </div>
+      )}
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
           <DataTable
         columns={columns}

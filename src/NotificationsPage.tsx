@@ -26,7 +26,6 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
   const sortedNotifications = [...notifications].sort((a, b) => a.read === b.read ? 0 : a.read ? 1 : -1);
   return (
     <div className="notification-list">
-      <h2>Notifiche</h2>
       {sortedNotifications.map((notification, index) => (
         <NotificationComponent
           key={index}

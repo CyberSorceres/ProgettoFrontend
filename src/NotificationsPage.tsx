@@ -3,7 +3,7 @@ import './NotificationsPage.css';
 
 // Interfaccia per il tipo di dati delle notifiche
 interface Notification {
-  id:number;
+  id:string;
   title: string;
   summary: string;
   description: string;
@@ -39,7 +39,7 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
 };
 
 // Componente Presentazionale per la visualizzazione dettagliata della notifica
-const NotificationDetailComponent: React.FC<{ notification: Notification; onClose: () => void }> = ({ notification, onClose }) => {
+const NotificationDetailComponent: React.FC<{ notification: Notification}> = ({ notification }) => {
   return (
     <div className="notification-detail">
       <h2>{notification.title}</h2>
@@ -53,9 +53,10 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
   const [notificationsState, setNotificationsState] = useState(notifications);
   const [selectedNotificationId, setSelectedNotificationId] = useState<string | null>(null);
 
-  const handleNotificationClick = (id: number) => {
+  const handleNotificationClick = (id: string) => {
     const updatedNotifications = [...notificationsState];
-    const index = updatedNotifications.findIndex(notification => notification.id === id);
+    const index = updatedNotifications.findIndex(notification => notification.id === id) as Number;
+
     if (index !== -1 && !updatedNotifications[index].read) {
       updatedNotifications[index].read = true;
       setNotificationsState(updatedNotifications);
@@ -78,7 +79,6 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
       {selectedNotificationId && (
         <NotificationDetailComponent
           notification={notificationsState.find(notification => notification.id === selectedNotificationId)!}
-          onClose={handleCloseDetail}
         />
       )}
     </div>
@@ -87,9 +87,9 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
 
 // Dati di esempio per le notifiche
 const notificationsData: Notification[] = [
-  { id:1, title: 'Notifica 1', summary: 'Sommario della notifica 1', description: 'Descrizione dettagliata della notifica 1', read: true },
-  { id:2, title: 'Notifica 2', summary: 'Sommario della notifica 2', description: 'Descrizione dettagliata della notifica 2', read: true },
-  { id:3, title: 'Notifica 3', summary: 'Sommario della notifica 3', description: 'Descrizione dettagliata della notifica 3', read: false },
+  { id:"1", title: 'Notifica 1', summary: 'Sommario della notifica 1', description: 'Descrizione dettagliata della notifica 1', read: true },
+  { id:"2", title: 'Notifica 2', summary: 'Sommario della notifica 2', description: 'Descrizione dettagliata della notifica 2', read: true },
+  { id:"3", title: 'Notifica 3', summary: 'Sommario della notifica 3', description: 'Descrizione dettagliata della notifica 3', read: false },
 ];
 
 // Componente principale

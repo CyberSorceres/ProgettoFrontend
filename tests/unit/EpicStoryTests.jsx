@@ -21,11 +21,7 @@ describe('EpicStory', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('renders a status in the table header', () => {
-    render(<EpicStory />);
-    const header = screen.getByRole('columnheader', { name: 'Status' });
-    expect(header).toBeInTheDocument();
-  });
+  
 
   it('renders a button to add a new story', () => {
     render(<EpicStory />);

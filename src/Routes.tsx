@@ -10,6 +10,8 @@ import { Suspense, useState } from "react";
 import { API } from "progettolib";
 import Login from "./Login";
 import { Outlet } from "react-router-dom";
+import Step2 from "./Step2";
+import { ChangePassword } from './ChangePassword'
 
 export const RouterBuilder = (api: API) => {
     const [login, setLogin] = useState(api.loggedIn());
@@ -80,7 +82,12 @@ export const RouterBuilder = (api: API) => {
 	    <Registrazione />
 	),
 	loader: ({params}) => {return params.inviteId}
-	
+    },
+      {
+	path: 'changePassword/:email',
+	element: <ChangePassword onChangePassword={() => {
+	    setLogin(true)
+	}}/>
     }
   ];
   const routes = [

@@ -35,12 +35,10 @@ const InviteUserButton: React.FC = () => {
   };
     const { id } = useLoaderData() as { id: string };
     const option = useRef(null)
+    const email = useRef(null)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      console.log(option.current.value)
-      const invite = await api.invite(id, option.current.value === 'user' ? 3 : 1)
-      const url = `${window.location.origin}/acceptInvite/${invite}`
-      alert(url)
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      const invite = await api.invite(id, email.current.value,  option.current.value === 'user' ? 3 : 1)
     setOpenModal(false);
   };
 
@@ -60,8 +58,11 @@ const InviteUserButton: React.FC = () => {
               ></button>
             </MDBModalHeader>
           <MDBModalBody>
+	  <label htmlFor="email">Email</label>
+	  <input type="text" onChange={handleChange} className="form-control" id="email" name="email" ref={email} required />
+	  {' '}
+      <br />
 	  <label htmlFor="role">Ruolo</label>
-						  {' '}
           <select ref={option} id="role">
 	    <option value="user">Cliente</option>
 	  <option value="dev">Sviluppatore</option>

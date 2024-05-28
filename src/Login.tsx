@@ -4,6 +4,7 @@ import { APIContext, api } from "./App";
 import { Link } from 'react-router-dom';
 import "./Login.css";
 import Password from "./Password";
+import { LoginState } from "progettolib";
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const [mail, setMail] = useState("");
@@ -14,11 +15,14 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (await api.login(mail, password)) {
+      e.preventDefault();
+      const result = await api.login(mail, password);
+    if (result === LoginState.LOGGED_IN) {
 	onLogin();
 	localStorage.setItem('token', api.token);
       navigate("/");
+    }else if (result === LoginState.MUST_SIGN_UP){
+	navigate(`/changePassword/${encodeURI(mail)}`)
     }else{
         setError("Utente non esistente, riprova");
     }

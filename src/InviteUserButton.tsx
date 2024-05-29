@@ -71,10 +71,9 @@ const InviteUserButton: React.FC = () => {
             <MDBModalFooter>
               <button
                 onClick={handleSubmit}
-                type="submit"
-                className="btn btn-primary"
-              >
-                Crea
+                type="submit"              
+                >
+                Invia
               </button>
               <button onClick={toggleModal}>Annulla</button>
             </MDBModalFooter>

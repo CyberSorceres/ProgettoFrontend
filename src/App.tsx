@@ -11,7 +11,7 @@ import {
 import { API, API_interface } from "progettolib";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import { LoadingProvider } from './LoadingContext';
 import { createContext } from "react";
 
 import NotFound from "./NotFound";
@@ -31,7 +31,9 @@ const App: React.FC = () => {
   const router = createBrowserRouter(RouterBuilder(api));
   return (
     <APIContext.Provider value={api}>
+      <LoadingProvider>
 	  <RouterProvider router={router} />
+    </LoadingProvider>
     </APIContext.Provider>
   );
 };

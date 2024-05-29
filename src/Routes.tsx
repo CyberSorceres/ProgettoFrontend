@@ -62,8 +62,8 @@ export const RouterBuilder = (api: API) => {
           <NotificationsPage />{" "}
         </RequireAuth>
       ),
-      loader: ({ params }) => {
-        return null;
+      loader: async ({ params }) => {
+          return await api.getNotifications();
       },
     },
     {

@@ -11,6 +11,7 @@ import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
 import InviteUserButton from './InviteUserButton'
+import BusinessRequest from './BusinessRequest'
 
 interface EpicStoryProp {
   _id: number;
@@ -60,7 +61,9 @@ const EpicStory: React.FC = () => {
   };
 
   return (
-    <div>
+      <div>
+	  <BusinessRequest />
+
       <h3 className='pageTitle'>{project.name}</h3>
       <div className="EpicStoryDiv">
         

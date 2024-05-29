@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
 import { MDBBtn } from 'mdb-react-ui-kit';
 
 import './BusinessRequest.css';
 import BackButton from './BackButton';
+import { api } from './App';
 
 
 const BusinessRequest: React.FC = () => {
+    const input = useRef(null)
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      // Aggiungi qui la logica backend
+	const reqs = input.current.value;
+	await api.sendBusinessRequirementsToAI(reqs)
     };
 
   return (
     <div className='container mt-5 table'>
         <h3>Requisiti di Business</h3>
         <form onSubmit={handleSubmit}>
-          <textarea className="form-control" id="businessRequest" name="businessRequest" placeholder='Inserisci i Requisiti di Business' required ></textarea>
+	  <textarea ref={input} className="form-control" id="businessRequest" name="businessRequest" placeholder='Inserisci i Requisiti di Business' required ></textarea>
           <div className='divBtn'>
-            <button className="submit" type="submit">Invia Requisiti</button>
+	  <button className="submit" type="submit" onClick={handleSubmit}>Invia Requisiti</button>
           </div>
         </form>
-        <BackButton/>
-
     </div>
   );
 };

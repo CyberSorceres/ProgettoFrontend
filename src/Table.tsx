@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import AddProjectButton from './AddProject';
 import './Table.css';
 import { Progetto as Project } from 'progettolib';
+import BusinessRequestButton from './BusinessRequestButton';
 
 const columns: TableColumn<Project>[] = [
   { name: 'Titolo', selector: (row) => row.name, sortable: true },
@@ -32,7 +33,9 @@ const ProjectsTable: React.FC = () => {
 
   return (
     <div className='container mt-5 table'>
-        <AddProjectButton/>
+            <AddProjectButton/>
+	    <BusinessRequestButton />
+	    
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
       <DataTable
         columns={columns}
@@ -44,5 +47,4 @@ const ProjectsTable: React.FC = () => {
     </div>
   );
 };
-
 export default ProjectsTable;

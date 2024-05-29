@@ -76,7 +76,7 @@ const AddProjectButton: React.FC = () => {
                 </form>
               </MDBModalBody>
               <MDBModalFooter>
-							<button type="submit" onClick={handleSubmit} className="btn btn-primary">Crea</button>
+		<button type="submit" onClick={handleSubmit} className="btn btn-primary">Crea</button>
                 <MDBBtn onClick={toggleModal}>Annulla</MDBBtn>
               </MDBModalFooter>
             </MDBModalContent>

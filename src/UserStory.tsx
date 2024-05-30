@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Table.css';
 import BackButton from './BackButton';
@@ -9,6 +9,8 @@ import DelateUser from './DelateUser';
 import RowDetails from './UserDetails';
 import './UserStory.css'
 import { EpicStory } from 'progettolib';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { useLoading } from './LoadingContext';
 
 interface UserStoryProp{
   id: number;
@@ -56,6 +58,17 @@ const columns: TableColumn<UserStoryProp>[] = [
   },
 
 ];
+const navigation = useNavigation();
+const { isLoading, setLoading } = useLoading();
+
+useEffect(() => {
+  if (navigation.state === 'loading') {
+    setLoading(true);
+  } else {
+    setLoading(false);
+  }
+}, [navigation.state, setLoading]);
+
 
 const handleButtonClick = (row: UserStoryProp) => {
   // Handle button click logic here
@@ -107,7 +120,12 @@ const handleButtonClick = (row: UserStoryProp) => {
       <h3 className='pageTitle'>{data.descrizione}</h3>
       <div className={`UserStoryDiv ${isOverlayVisible ? 'overlay-active' : ''}`}>
       {isOverlayVisible && <div className="overlay" onClick={handleToggleMenuClose}></div>}
-      
+      {isLoading && (
+        <div className="loading-spinner">
+          <ClipLoader size={50} color={"#123abc"} loading={isLoading} />
+          <p>Caricamento in corso...</p>
+        </div>
+      )}
           
           <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
         <div className='data-table-wrapper'>

@@ -28,7 +28,7 @@ const BusinessRequestButton: React.FC = () => {
         <MDBModal tabIndex='-1' modal open={openModal} centered>
             <MDBModalDialog>
 	    <MDBModalContent className='dialogContent'>
-	    <BusinessRequest />
+	    <BusinessRequest onSubmit={()=>setOpenModal(false)}/>
 	    </MDBModalContent> 
             </MDBModalDialog>
         </MDBModal>

@@ -9,13 +9,14 @@ import BackButton from './BackButton';
 import { api } from './App';
 
 
-const BusinessRequest: React.FC = () => {
+const BusinessRequest: React.FC = ({onSubmit}) => {
     const input = useRef(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 	const reqs = input.current.value;
 	await api.sendBusinessRequirementsToAI(reqs)
+	onSubmit()
     };
 
   return (

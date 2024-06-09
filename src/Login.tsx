@@ -6,6 +6,7 @@ import "./Login.css";
 import Password from "./Password";
 import { LoginState } from "progettolib";
 import ClipLoader from 'react-spinners/ClipLoader';
+import {setIsPm } from './Routes'
 
 const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const [mail, setMail] = useState("");
@@ -19,10 +20,12 @@ const Login: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
       e.preventDefault();
       setLoading(true);
     try {
-      const result = await api.login(mail, password);
-    if (result === LoginState.LOGGED_IN) {
+      const result = await api.login('pm@gmail.com', password);
+	if (result === LoginState.LOGGED_IN) {
+	setIsPm(api.role === 1)
 	onLogin();
-	localStorage.setItem('token', api.token);
+	    localStorage.setItem('token', api.token);
+	    localStorage.setItem('role', api.role);
       navigate("/");
     }else if (result === LoginState.MUST_SIGN_UP){
 	navigate(`/changePassword/${encodeURI(mail)}`)

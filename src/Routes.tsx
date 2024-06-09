@@ -13,6 +13,12 @@ import { Outlet } from "react-router-dom";
 import Step2 from "./Step2";
 import { ChangePassword } from './ChangePassword'
 
+export let isPm = false
+
+export function setIsPm(value: boolean) {
+    isPm = value
+}
+
 export const RouterBuilder = (api: API) => {
     const [login, setLogin] = useState(api.loggedIn());
   const generalRoutes = [

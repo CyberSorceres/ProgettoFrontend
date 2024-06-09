@@ -44,9 +44,9 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
 const NotificationDetailComponent: React.FC<{ notification: Notification}> = ({ notification }) => {
     const handleApprove = async () => {
 	const id = await api.addProject({
-	    name: 'New project',
+	    name: 'Health Track',
 	    ai: 'chatgpt',
-	    cliente: 'test',
+	    cliente: 'MedLife S.r.l',
 	} as any)
 	await createEpicStoriesFromBR(api, notification.message, id)
     }

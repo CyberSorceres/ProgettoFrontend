@@ -44,11 +44,7 @@ const AddEpicStoryButton: React.FC = () => {
     setLoading(true);
     try {
       const { id: epicId } = await api.addEpicStory(newEpic as any, id);
-      const response = await api.bedrock(newEpic.descrizione);
-      const { userStories } = JSON.parse(response.content[0].text.replace('```json', '').replace('```', ''));
-      for (const user of userStories) {
-        await api.addUserStrory({ tag: (Math.floor(Math.random() * 1000)).toString(), description: user.description }, id, epicId);
-      }
+      await createUserStoriesFromEpic(api, newEpic.descrizione, id, epicId)
       // Chiudi il modal e resetta lo stato del form
       setLoading(false);
       setOpenModal(false);

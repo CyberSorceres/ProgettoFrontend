@@ -4,13 +4,15 @@ import { useLoaderData, useNavigate, useNavigation } from 'react-router-dom';
 import AddProjectButton from './AddProject';
 import './Table.css';
 import { Progetto as Project } from 'progettolib';
+import BusinessRequestButton from './BusinessRequestButton';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useLoading } from './LoadingContext';
+import { isPm } from './Routes';
 
 const columns: TableColumn<Project>[] = [
   { name: 'Titolo', selector: (row) => row.name, sortable: true },
-  { name: 'Cliente', selector: (row) => row.name, sortable: true },
-  { name: 'Data di Inizio', selector: (row) => row.name, sortable: true },
+  { name: 'Cliente', selector: (row) => row._cliente, sortable: true },
+    { name: 'Data di Inizio', selector: (row) => row._date.slice(0, 10), sortable: true },
   {
     name: 'Progress',
     selector: (row) => row.progress || 0.5,
@@ -35,8 +37,9 @@ const ProjectsTable: React.FC = () => {
       }
     }, [navigation.state, setLoading]);
   
-
+    console.log(projects)
     if (!projects) {
+	console.log("returning early...");
 	return <>Loading...</>
     }
   
@@ -54,7 +57,9 @@ const ProjectsTable: React.FC = () => {
 
   return (
     <div className='container mt-5 table'>
-        <AddProjectButton/>
+            {isPm &&  <AddProjectButton/>}
+	{isPm || <BusinessRequestButton />}
+	    
         <div className='textSearch'><input type="text" placeholder="Search" onChange={handleFilter}/></div>
         {isLoading && (
         <div className="loading-spinner">
@@ -72,5 +77,4 @@ const ProjectsTable: React.FC = () => {
     </div>
   );
 };
-
 export default ProjectsTable;

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './NotificationsPage.css';
+import { useLoaderData } from 'react-router-dom';
+import { api } from './App';
+import { Progetto } from 'progettolib';
+import { createEpicStoriesFromBR } from './ai';
 
 // Interfaccia per il tipo di dati delle notifiche
 interface Notification {
-  id:string;
+    _id:string;
   title: string;
-  summary: string;
-  description: string;
+  message: string;
   read: boolean;
 }
 
@@ -15,7 +18,7 @@ const NotificationComponent: React.FC<{ notification: Notification; onClick: () 
   return (
     <div className={`notification ${notification.read ? '' : 'unread'}`} onClick={onClick}>
       <h3 className={notification.read ? '' : 'bold'}>{notification.title}</h3>
-      <p>{notification.summary}</p>
+      <p>{notification.description}</p>
       {!notification.read && <span className="unread-dot"></span>}
     </div>
   );
@@ -30,7 +33,7 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
         <NotificationComponent
           key={index}
           notification={notification}
-          onClick={() => onNotificationClick(notification.id)}
+          onClick={() => onNotificationClick(notification._id)}
         />
       ))}
     </div>
@@ -39,10 +42,20 @@ const NotificationListComponent: React.FC<{ notifications: Notification[]; onNot
 
 // Componente Presentazionale per la visualizzazione dettagliata della notifica
 const NotificationDetailComponent: React.FC<{ notification: Notification}> = ({ notification }) => {
+    const handleApprove = async () => {
+	const id = await api.addProject({
+	    name: 'Health Track',
+	    ai: 'chatgpt',
+	    cliente: 'MedLife S.r.l',
+	} as any)
+	await createEpicStoriesFromBR(api, notification.message, id)
+    }
   return (
     <div className="notification-detail">
       <h2>{notification.title}</h2>
-      <p>{notification.description}</p>
+	  <h4>{notification.message}</h4>
+	  {notification.type === 0 && <button className='submit' onClick={handleApprove}>Approva</button>}
+      {notification.type === 0 && <button className='submit' onClick={() => {}}>Elimina</button>}
     </div>
   );
 };
@@ -52,18 +65,18 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
   const [notificationsState, setNotificationsState] = useState(notifications);
   const [selectedNotificationId, setSelectedNotificationId] = useState<string | null>(null);
 
-  const handleNotificationClick = (id: string) => {
+  const handleNotificationClick = async (id: string) => {
     const updatedNotifications = [...notificationsState];
-    const index = updatedNotifications.findIndex(notification => notification.id === id);
+    const index = updatedNotifications.findIndex(notification => notification._id === id);
 
     if (index !== -1 && !updatedNotifications[index].read) {
       updatedNotifications[index].read = true;
       setNotificationsState(updatedNotifications);
     }
-    setSelectedNotificationId(id);
+
+      setSelectedNotificationId(id);
+      await api.readNotification(id)
   };
-
-
 
   return (
     <div className="notification-page">
@@ -75,23 +88,17 @@ const NotificationContainer: React.FC<{ notifications: Notification[] }> = ({ no
       </div>
       {selectedNotificationId && (
         <NotificationDetailComponent
-          notification={notificationsState.find(notification => notification.id === selectedNotificationId)!}
+          notification={notificationsState.find(notification => notification._id === selectedNotificationId)!}
         />
       )}
     </div>
   );
 };
 
-// Dati di esempio per le notifiche
-const notificationsData: Notification[] = [
-  { id:"1", title: 'Notifica 1', summary: 'Sommario della notifica 1', description: 'Descrizione dettagliata della notifica 1', read: true },
-  { id:"2", title: 'Notifica 2', summary: 'Sommario della notifica 2', description: 'Descrizione dettagliata della notifica 2', read: true },
-  { id:"3", title: 'Notifica 3', summary: 'Sommario della notifica 3', description: 'Descrizione dettagliata della notifica 3', read: false },
-];
-
 // Componente principale
 const NotificationPage: React.FC = () => {
-  return <NotificationContainer notifications={notificationsData} />;
+    const notifications = useLoaderData()
+  return <NotificationContainer notifications={notifications} />;
 };
 
 export default NotificationPage;

@@ -11,8 +11,10 @@ import './EpicStory.css';
 import { Progetto } from 'progettolib';
 import AddEpicStoryButton from './AddEpicStory';
 import InviteUserButton from './InviteUserButton'
+import BusinessRequest from './BusinessRequest'
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useLoading } from './LoadingContext';
+import { isPm } from './Routes';
 
 interface EpicStoryProp {
   _id: number;
@@ -68,12 +70,12 @@ const EpicStory: React.FC = () => {
   };
 
   return (
-    <div>
+      <div>
       <h3 className='pageTitle'>{project.name}</h3>
       <div className="EpicStoryDiv">
         
-          <AddEpicStoryButton></AddEpicStoryButton>
-	  <InviteUserButton> </InviteUserButton>
+          {isPm &&  <AddEpicStoryButton></AddEpicStoryButton>}
+	  {isPm && <InviteUserButton> </InviteUserButton>}
     {isLoading && (
         <div className="loading-spinner">
           <ClipLoader size={50} color={"#123abc"} loading={isLoading} />

@@ -11,6 +11,7 @@ import './UserStory.css'
 import { EpicStory } from 'progettolib';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useLoading } from './LoadingContext';
+import { isPm } from './Routes';
 
 interface UserStoryProp{
   id: number;
@@ -53,7 +54,8 @@ const columns: TableColumn<UserStoryProp>[] = [
   },
   {
     name: '',
-    cell: (row: UserStoryProp) => <DelateUser user={row} />,
+      cell: (row: UserStoryProp) => { return (isPm && <DelateUser user={row} /> )
+},
     width:'10%',
   },
 

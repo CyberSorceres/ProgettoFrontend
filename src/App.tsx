@@ -22,8 +22,10 @@ export const APIContext = createContext<API | null>(null);
 export let api = createAPI();
 function createAPI() {
     const api = new API() as (API_interface & {token: string});
-    if(localStorage.getItem('token'))
+    if(localStorage.getItem('token')) {
 	api.token = localStorage.getItem('token')
+	api.role =  localStorage.getItem('role')
+    }
     return api
 }
 

@@ -9,5 +9,6 @@ export default defineConfig({
 	    external: ['progettolib']
 	}
     },
+    base: '/ProgettoFrontend/',
 
 })
